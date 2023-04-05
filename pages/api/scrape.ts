@@ -12,7 +12,11 @@
 //   const title = $('title').text()
 //   const description = $('meta[name="description"]').attr('content')
 //   res.status(200).json({ title, description })
+//   // res.status(200).send(data);
 // }
+
+
+
 
 import cheerio from 'cheerio';
 import axios from 'axios';
@@ -39,3 +43,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(500).json({ error: error.message });
   }
 }
+
+
