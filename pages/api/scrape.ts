@@ -13,3 +13,4 @@ export default async function handler(
   const description = $('meta[name="description"]').attr('content')
   res.status(200).json({ title, description })
 }
+
