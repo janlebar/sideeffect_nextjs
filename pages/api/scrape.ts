@@ -36,7 +36,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const description = $('meta[name="description"]').attr('content');
 
     // Scrape the entire HTML content
-    const html = $('html').html();
+    // const html = $('html').html();
+    const html = $('html').toString();
 
     res.status(200).json({ title, description, html });
   } catch (error) {
