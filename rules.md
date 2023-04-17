@@ -1,0 +1,1 @@
+It is important to note that while these resources can provide valuable information, they should not be used as a substitute for professional medical advice. If you have any concerns about your medications or potential side effects, always consult with your healthcare provider.
