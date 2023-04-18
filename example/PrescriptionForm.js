@@ -1,4 +1,4 @@
-import PrescriptionForm from '../components/PrescriptionForm';
+import PrescriptionForm from './example component/PrescriptionForm';
 
 function PrescriptionPage() {
   return (
