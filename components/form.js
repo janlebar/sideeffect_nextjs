@@ -38,7 +38,7 @@ function Form() {
   const [urlInputs, setUrlInputs] = useState(['']);
 
   const handleScrape = async (urlInput) => {
-    const response = await fetch(`/api/scrape?url=https://www.drugs.com/${urlInput}#side-effects`);
+    const response = await fetch(`/api/scrape?url=https://www.drugs.com/sfx/${urlInput}-side-effects.html`);
     const scrapedData = await response.json();
     setData((prevData) => [...prevData, scrapedData]);
   };
