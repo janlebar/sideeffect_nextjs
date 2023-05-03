@@ -70,6 +70,9 @@
 
 import React, { useState } from 'react';
 import Userinput from '../components/Userinput';
+// import './styles/scrape.css';
+// import styles from './styles/scrape.module.css';
+
 
 export default function MyComponent() {
   const [inputs, setInputs] = useState(['']);
