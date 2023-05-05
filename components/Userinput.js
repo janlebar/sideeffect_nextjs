@@ -2,32 +2,40 @@ import React, { useState } from 'react';
 import Form from './Form';
 
 function UserInput() {
+  // Set up state variables for the scraped data and the URL inputs
   const [data, setData] = useState([]);
   const [urlInputs, setUrlInputs] = useState(['']);
 
+  // Function to handle scraping data from a given URL input
   const handleScrape = async (urlInput) => {
     const response = await fetch(`/api/scrape?url=https://www.drugs.com/sfx/${urlInput}-side-effects.html`);
     const scrapedData = await response.json();
-    setData((prevData) => [...prevData, scrapedData]);
+
+    // appenda nove skrejpane simptome na list obstojecih skrejpanih simptomov
+    setData(oldData => [...oldData, scrapedData]);
   };
 
+  // Function to handle form submission for a given URL input
   const handleSubmit = (event, index) => {
     event.preventDefault();
     handleScrape(urlInputs[index]);
   };
 
+  // Function to handle changes to the URL input field
   const handleChange = (event, index) => {
     const newUrlInputs = [...urlInputs];
     newUrlInputs[index] = event.target.value;
     setUrlInputs(newUrlInputs);
   };
 
+  // Function to add a new URL input field
   const handleAddInput = () => {
     setUrlInputs((prevInputs) => [...prevInputs, '']);
   };
 
   return (
     <div>
+      {/* Map over the URL inputs to render a Form component for each */}
       {urlInputs.map((urlInput, index) => (
         <Form
           key={index}
@@ -36,14 +44,23 @@ function UserInput() {
           onChange={(event) => handleChange(event, index)}
         />
       ))}
+      {/* Button to add a new URL input field */}
       <button onClick={handleAddInput}>Add Input</button>
-      {data.map((scrapedData, index) => (
+      {/* Map over the scraped data to render each set of data */}
+      {data.map((sideEffects, index) =>
         <div key={index}>
-          <h2>{scrapedData.title}</h2>
-          <p>{scrapedData.description}</p>
-          <div dangerouslySetInnerHTML={{ __html: scrapedData.html }}></div>
+          {sideEffects.map((scrapedData, index) => (
+            <div key={index}>
+              <h2>{scrapedData.category}</h2>
+              <b>{scrapedData.occurance} ({scrapedData.from} to {scrapedData.to})</b>
+              <br/>
+              <b>{scrapedData.symptoms.join(", ")}</b>
+              {/* Use dangerouslySetInnerHTML to render the scraped HTML */}
+              {/*<div dangerouslySetInnerHTML={{ __html: scrapedData.content }}></div>*/}
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }

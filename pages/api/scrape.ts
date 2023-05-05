@@ -93,23 +93,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { url } = req.query; // Destructuring the "url" query parameter from the request object.
 
   try { // Wrapping the code in a try-catch block to handle any errors that may occur.
-    const { data } = await axios.get(url); // Making an HTTP GET request to the URL specified in the "url" query parameter.
+    const { data } = await axios.get(url as string); // Making an HTTP GET request to the URL specified in the "url" query parameter.
     const $ = cheerio.load(data); // Parsing the HTML content using cheerio.
 
-    // Scrape all h2 titles
-    const h2Titles = $('h2').map((i, el) => $(el).text()).get(); // Extracting all the h2 tag titles.
+    // vsi h3 naslovi za #professional-info elementom
+    const allTitles = $('.contentBox #professional-info').nextAll("h3").get();
 
-    // Scrape everything under the h2 titles
-    const h2Content = $('h2').map((i, el) => {
-      const title = $(el).text(); // Getting the h2 tag title.
-      const content = $(el).nextUntil('h2').map((j, e) => $(e).html()).get(); // Getting all the content under the h2 tag until the next h2 tag is encountered.
-      return { title, content };
-    }).get();
+    // lista vseh simptomov
+    const results = [];
 
-    // const html = h2Titles.join('') + h2Content.join('');
+    // regex ki matcha elemente med posameznimi kategorijami simptomov in dobi occurance, from, to in list simptomov
+    const regex = /(Rare|Common|Uncommon)\s\((\d+(?:\.\d+)?)%\s(to)\s(\d+(?:\.\d+)?)%\):\s(.+)/;
 
-    res.status(200).json({ h2Titles, h2Content }); // Sending a JSON response containing the extracted h2 titles and their corresponding content.
-  } catch (error) { // Catching any errors that may have occurred.
+    for (const h3 of allTitles) {
+      // vsi elementi men enim in drugim h3 elementom
+      for (const content of $(h3).nextUntil('h3').get()) {
+        const matches = $(content).text().match(regex);
+        if (!matches) continue;
+
+        results.push({
+          category: $(h3).text(),
+          occurance: matches[1],
+          from: parseFloat(matches[2]),
+          to: parseFloat(matches[4]),
+          symptoms: matches[5].split(", ") // splitaj text po vejici
+        })
+      }
+    }
+
+    res.status(200).json(results); // Sending a JSON response containing the extracted h2 titles and their corresponding content.
+  } catch (error: any) { // Catching any errors that may have occurred.
     res.status(500).json({ error: error.message }); // Sending a JSON response with an error message.
   }
 }
