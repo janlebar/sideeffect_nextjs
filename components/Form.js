@@ -1,4 +1,5 @@
 import React from 'react';
+import Buttons from './Buttons';
 
 function Form({ urlInput, onSubmit, onChange }) {
   return (
@@ -8,6 +9,7 @@ function Form({ urlInput, onSubmit, onChange }) {
         <input type="text" value={urlInput} onChange={onChange} />
       </label>
       <button type="submit">Scrape Data</button>
+      <Buttons/>
     </form>
   );
 }
