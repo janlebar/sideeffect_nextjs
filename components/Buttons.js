@@ -1,11 +1,15 @@
+import React from 'react';
+import styles from './styles.module.css';
+
+
 function Buttons() {
-    return (
-      <div className="card">
-        <div className="actions">
-          <button className="btn">Delete</button>
-        </div>
+  return (
+    <div className="card"> {/* Apply the 'card' class to the div */}
+      <div className={styles.button}>
+        <button className="btn">Delete</button>
       </div>
-    );
-  }
-  
-  export default Buttons;
+    </div>
+  );
+}
+
+export default Buttons;
