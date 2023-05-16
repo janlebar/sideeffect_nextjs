@@ -1,20 +1,23 @@
-import React from 'react';
-import ChartJS from 'chart.js/auto';
+import React, { useEffect, useRef } from 'react';
+import Chart from 'chart.js/auto';
 
-class RadarChart extends React.Component {
-  chartRef = React.createRef();
-  chart = null;
+function RadarChart() {
+  const chartRef = useRef();
+  let chart = null;
 
-  componentDidMount() {
-    this.buildChart();
-  }
+  useEffect(() => {
+    buildChart();
+    return () => {
+      destroyChart();
+    };
+  }, []);
 
-  buildChart() {
-    const myChartRef = this.chartRef.current.getContext('2d');
-    if (this.chart) {
-      this.chart.destroy();
+  const buildChart = () => {
+    const myChartRef = chartRef.current.getContext('2d');
+    if (chart) {
+      destroyChart();
     }
-    this.chart = new ChartJS(myChartRef, {
+    chart = new Chart(myChartRef, {
       type: 'radar',
       data: {
         labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
@@ -37,13 +40,18 @@ class RadarChart extends React.Component {
         }
       }
     });
-  }
+  };
 
-  render() {
-    return (
-      <canvas ref={this.chartRef} />
-    );
-  }
+  const destroyChart = () => {
+    if (chart) {
+      chart.destroy();
+      chart = null;
+    }
+  };
+
+  return (
+    <canvas ref={chartRef} />
+  );
 }
 
 export default RadarChart;

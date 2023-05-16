@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './styles.module.css';
-
 
 function Buttons() {
   return (
-    <div className="card"> {/* Apply the 'card' class to the div */}
-      <div className={styles.button}>
-        <button className="btn">Delete</button>
+    <div className="card bg-white p-4 shadow-md rounded-md"> 
+      <div className="flex justify-end">
+        <button className="btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md" type="button">
+          Delete
+        </button>
       </div>
     </div>
   );
