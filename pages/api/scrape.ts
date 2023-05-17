@@ -1,88 +1,3 @@
-// import cheerio from 'cheerio'
-// import axios from 'axios'
-// import { NextApiRequest, NextApiResponse } from 'next'
-
-// export default async function handler(
-//   req: NextApiRequest,
-//   res: NextApiResponse
-// ) {
-//   const { url } = req.query
-//   const { data } = await axios.get(url)
-//   const $ = cheerio.load(data)
-//   const title = $('title').text()
-//   const description = $('meta[name="description"]').attr('content')
-//   res.status(200).json({ title, description })
-//   // res.status(200).send(data);
-// }
-
-
-//   // TA DELA
-
-// import cheerio from 'cheerio';
-// import axios from 'axios';
-// import { NextApiRequest, NextApiResponse } from 'next';
-
-// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-//   const { url } = req.query;
-
-//   try {
-//     const { data } = await axios.get(url);
-//     const $ = cheerio.load(data);
-
-//     // Scrape the title
-//     const title = $('title').text();
-
-//     // Scrape the meta description
-//     const description = $('meta[name="description"]').attr('content');
-
-//     // Scrape the entire HTML content
-//     // const html = $('html').html();
-//     const html = $('html').toString();
-
-//     res.status(200).json({ title, description, html });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-
-
-//   // try {
-//   //   const { data } = await axios.get(url);
-//   //   const $ = cheerio.load(data);
-
-//   //   // Scrape the professional info section
-//   //   const professionalInfo = $('#professional-info').html();
-
-//   //   res.status(200).json({ professionalInfo });
-//   // } catch (error) {
-//   //   res.status(500).json({ error: error.message });
-//   // }
-
-// }
-
-
-//  vrne naslove
-
-// import cheerio from 'cheerio';
-// import axios from 'axios';
-// import { NextApiRequest, NextApiResponse } from 'next';
-
-// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-//   const { url } = req.query;
-
-//   try {
-//     const { data } = await axios.get(url);
-//     const $ = cheerio.load(data);
-
-//     // Scrape all h2 titles
-//     const html = $('h2').map((i, el) => $(el).text()).get();
-
-//     res.status(200).json({ html });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// }
-
-
 import cheerio from 'cheerio'; // Importing the cheerio library which is used to parse HTML and XML documents.
 
 import axios from 'axios'; // Importing the axios library which is used to make HTTP requests.
@@ -111,13 +26,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const matches = $(content).text().match(regex);
         if (!matches) continue;
 
+
         results.push({
-          category: $(h3).text(),
-          occurance: matches[1],
-          from: parseFloat(matches[2]),
-          to: parseFloat(matches[4]),
-          symptoms: matches[5].split(", ") // splitaj text po vejici
-        })
+          category: $(h3).text(), // Dobimo besedilo znotraj elementa <h3> in ga dodelimo lastnosti 'category'
+          occurance: matches[1], // Dodelimo vrednost prve ujete skupine v polju 'matches' lastnosti 'occurance'
+          from: parseFloat(matches[2]), // Parsiramo vrednost druge ujete skupine v polju 'matches' kot število s plavajočo vejico in jo dodelimo lastnosti 'from'
+          to: parseFloat(matches[4]), // Parsiramo vrednost četrte ujete skupine v polju 'matches' kot število s plavajočo vejico in jo dodelimo lastnosti 'to'
+          symptoms: matches[5].split(", ") // splitaj text po vejici, Razdelimo besedilo v peti ujeti skupini v polju 'matches' glede na vejico in presledek ter ustvarimo polje simptomov, ki ga dodelimo lastnosti 'symptoms'
+        });
+
       }
     }
 
@@ -129,3 +46,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
 
+//  vrne naslove
+
+// import cheerio from 'cheerio';
+// import axios from 'axios';
+// import { NextApiRequest, NextApiResponse } from 'next';
+
+// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+//   const { url } = req.query;
+
+//   try {
+//     const { data } = await axios.get(url);
+//     const $ = cheerio.load(data);
+
+//     // Scrape all h2 titles
+//     const html = $('h2').map((i, el) => $(el).text()).get();
+
+//     res.status(200).json({ html });
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// }
