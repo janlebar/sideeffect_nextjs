@@ -1,24 +1,21 @@
 import Link from 'next/link';
-import styles from './MainNavigation.module.css';
-
-
 
 function Home() {
   return (
-    <ul className={styles.navList}>
-      <li className={styles.navItem}>
+    <ul className="flex gap-4">
+      <li className="mr-4">
         <Link href="/">
-          <span className={styles.navLink}>Home</span>
+          <span className="text-white hover:underline cursor-pointer">Home</span>
         </Link>
       </li>
-      <li className={styles.navItem}>
+      <li className="mr-4">
         <Link href="/about">
-          <span className={styles.navLink}>About Us</span>
+          <span className="text-white hover:underline cursor-pointer">About Us</span>
         </Link>
       </li>
-      <li className={styles.navItem}>
+      <li className="mr-4">
         <Link href="/blog/hello-world">
-          <span className={styles.navLink}>Blog Post</span>
+          <span className="text-white hover:underline cursor-pointer">Blog Post</span>
         </Link>
       </li>
     </ul>

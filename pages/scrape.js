@@ -45,7 +45,7 @@
 // Importing React and useState hook from React library and Userinput component from components folder
 import React, { useState } from 'react';
 import Userinput from '../components/Userinput';
-import MainNavi
+
 
 // Component function declaration
 export default function MyComponent() {
