@@ -1,0 +1,19 @@
+.navList {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .navItem {
+    margin-right: 1rem;
+  }
+  
+  .navLink {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem;
+  }
+  
+  .navLink:hover {
+    text-decoration: underline;
+  }
