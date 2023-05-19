@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-function RadarChart() {
+function RadarChart(args) {
   const chartRef = useRef();
   let chart = null;
 
@@ -11,6 +11,8 @@ function RadarChart() {
       destroyChart();
     };
   }, []);
+
+  console.log(args.data);
 
   const buildChart = () => {
     const myChartRef = chartRef.current.getContext('2d');

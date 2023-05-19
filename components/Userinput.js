@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Form from './Form';
 
-function UserInput() {
+function UserInput(args) {
 
   // Set up state variables for the scraped data and the URL inputs
   let [data, setData] = useState([]);
@@ -16,11 +16,14 @@ function UserInput() {
       return;
     }
 
+    // tuki je output za json za izpis in za CHART KOMPONENTO samo prej //radar set data v scrape.js
     const scrapedData = await response.json();
 
     // appenda nove skrejpane simptome na list obstojecih skrejpanih simptomov
     setData(oldData => [...oldData, scrapedData]);
     setError(false);
+
+    args.onData(scrapedData);
   };
 
   // Function to handle form submission for a given URL input
@@ -44,7 +47,7 @@ function UserInput() {
   if (hasError) {
     return <a>Fetch Error</a>;
   }
-  
+
   return (
     <div>
       {/* Map over the URL inputs to render a Form component for each */}
