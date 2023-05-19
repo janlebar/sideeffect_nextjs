@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Form from './Form';
 
 function UserInput() {
+
   // Set up state variables for the scraped data and the URL inputs
   const [data, setData] = useState([]);
   const [urlInputs, setUrlInputs] = useState(['']);

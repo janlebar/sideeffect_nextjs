@@ -3,6 +3,7 @@ import Buttons from './Buttons';
 
 function Form({ urlInput, onSubmit, onChange }) {
   return (
+    
     <form className="bg-white p-6 shadow-md rounded-md" onSubmit={onSubmit}>
       <label className="block mb-4">
         Enter drug name:

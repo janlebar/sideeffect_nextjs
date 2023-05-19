@@ -9,8 +9,8 @@ function Home() {
         </Link>
       </li>
       <li className="mr-4">
-        <Link href="/about">
-          <span className="text-white hover:underline cursor-pointer">About Us</span>
+        <Link href="/scrape">
+          <span className="text-white hover:underline cursor-pointer">Scrape</span>
         </Link>
       </li>
       <li className="mr-4">

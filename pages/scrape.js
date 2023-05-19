@@ -45,27 +45,20 @@
 // Importing React and useState hook from React library and Userinput component from components folder
 import React, { useState } from 'react';
 import Userinput from '../components/Userinput';
-
+import MainNavigation from '../components/layout/MainNavigation';
 
 // Component function declaration
 export default function MyComponent() {
-  // Initializing state variables using useState hook
-  const [inputs, setInputs] = useState(['']);
-  //const [html, setHtml] = useState('');
-
-  // Function to handle adding input URL
-  const handleAddInput = (urlInput) => {
-    // Updating the state of the component with the new input URL
-    setInputs((prevInputs) => [...prevInputs, urlInput]);
-  };
+  
 
   // Rendering the component
   return (
+
     <div>
-      {/* Mapping over input URLs to render Userinput component for each */}
-      {inputs.map((urlInput, index) => (
-        <Userinput key={index} onAddInput={handleAddInput} />
-      ))}
+          <MainNavigation />
+        <Userinput />
     </div>
   );
 }
+
+
