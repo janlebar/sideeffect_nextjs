@@ -4,16 +4,23 @@ import Form from './Form';
 function UserInput() {
 
   // Set up state variables for the scraped data and the URL inputs
-  const [data, setData] = useState([]);
+  let [data, setData] = useState([]);
+  const [hasError, setError] = useState(false);
   const [urlInputs, setUrlInputs] = useState(['']);
 
   // Function to handle scraping data from a given URL input
   const handleScrape = async (urlInput) => {
     const response = await fetch(`/api/scrape?url=https://www.drugs.com/sfx/${urlInput}-side-effects.html`);
+    if (!response.ok) {
+      setError(true);
+      return;
+    }
+
     const scrapedData = await response.json();
 
     // appenda nove skrejpane simptome na list obstojecih skrejpanih simptomov
     setData(oldData => [...oldData, scrapedData]);
+    setError(false);
   };
 
   // Function to handle form submission for a given URL input
@@ -34,6 +41,10 @@ function UserInput() {
     setUrlInputs((prevInputs) => [...prevInputs, '']);
   };
 
+  if (hasError) {
+    return <a>Fetch Error</a>;
+  }
+  
   return (
     <div>
       {/* Map over the URL inputs to render a Form component for each */}
@@ -67,3 +78,5 @@ function UserInput() {
 }
 
 export default UserInput;
+
+
