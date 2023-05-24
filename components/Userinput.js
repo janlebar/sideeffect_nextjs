@@ -15,15 +15,18 @@ function UserInput(args) {
       setError(true);
       return;
     }
-
-    // tuki je output za json za izpis in za CHART KOMPONENTO samo prej //radar set data v scrape.js
+  
     const scrapedData = await response.json();
-
-    // appenda nove skrejpane simptome na list obstojecih skrejpanih simptomov
+  
+    // Calculate the occurrence as a percentage
+    const occurrence = parseFloat(scrapedData[0].occurrence);
+    const occurrencePercentage = occurrence * 10;
+  
+    // Pass the occurrence percentage to the onData callback
+    args.onData(occurrencePercentage);
+  
     setData(oldData => [...oldData, scrapedData]);
     setError(false);
-
-    args.onData(scrapedData);
   };
 
   // Function to handle form submission for a given URL input

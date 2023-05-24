@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-function RadarChart(args) {
+function RadarChart(props) {
   const chartRef = useRef();
   let chart = null;
 
@@ -11,8 +11,6 @@ function RadarChart(args) {
       destroyChart();
     };
   }, []);
-
-  console.log(args.data);
 
   const buildChart = () => {
     const myChartRef = chartRef.current.getContext('2d');
@@ -25,7 +23,7 @@ function RadarChart(args) {
         labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
         datasets: [{
           label: 'Dataset 1',
-          data: [3, 5, 2, 6, 7],
+          data: [props.data],
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgba(255, 99, 132, 1)',
           borderWidth: 1
@@ -51,9 +49,7 @@ function RadarChart(args) {
     }
   };
 
-  return (
-    <canvas ref={chartRef} />
-  );
+  return <canvas ref={chartRef} />;
 }
 
 export default RadarChart;
