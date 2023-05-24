@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-function RadarChart(args) {
+function RadarChart({ data }) {
   const chartRef = useRef();
   let chart = null;
 
@@ -12,22 +12,28 @@ function RadarChart(args) {
     };
   }, []);
 
-  console.log(args.data);
 
+  
   const buildChart = () => {
     const myChartRef = chartRef.current.getContext('2d');
     if (chart) {
       destroyChart();
     }
+    
+    const labels = data.map(item => item.category);
+    const chartData = data.map(item => item.occurrence);
+    const backgroundColors = data.map(item => 'rgba(255, 99, 132, 0.2)');
+    const borderColors = data.map(item => 'rgba(255, 99, 132, 1)');
+    
     chart = new Chart(myChartRef, {
       type: 'radar',
       data: {
-        labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+        labels: labels,
         datasets: [{
           label: 'Dataset 1',
-          data: [3, 5, 2, 6, 7],
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255, 99, 132, 1)',
+          data: chartData,
+          backgroundColor: backgroundColors,
+          borderColor: borderColors,
           borderWidth: 1
         }]
       },
@@ -43,6 +49,7 @@ function RadarChart(args) {
       }
     });
   };
+  
 
   const destroyChart = () => {
     if (chart) {

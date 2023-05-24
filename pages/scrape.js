@@ -22,7 +22,7 @@ export default function MyComponent() {
           {/* Tle pokliče funkcijo iz userinput if fetch json in seta v FUNKCIJO:function onData(data) {
     setData(data); iz tu gre set data v radar chart KOMPONENTO: <RadarChart data={data}/>*/}
         <Userinput onData={onData} />
-        <RadarChart data={data}/>
+        <RadarChart data={results} />
     </div>
   );
 }

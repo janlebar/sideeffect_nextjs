@@ -67,7 +67,7 @@ function UserInput(args) {
           {sideEffects.map((scrapedData, index) => (
             <div key={index}>
               <h2>{scrapedData.category}</h2>
-              <b>{scrapedData.occurance} ({scrapedData.from} to {scrapedData.to})</b>
+              <b>{scrapedData.occurrence} ({scrapedData.from} to {scrapedData.to})</b>
               <br/>
               <b>{scrapedData.symptoms.join(", ")}</b>
               {/* Use dangerouslySetInnerHTML to render the scraped HTML */}
