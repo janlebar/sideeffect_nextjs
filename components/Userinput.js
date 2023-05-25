@@ -80,4 +80,17 @@ function UserInput(args) {
   );
 }
 
+export const DUMMY_DATA = [
+  {
+    id: 'm1',
+    category: 'Dyspepsia',
+    occurrence: '10',
+  },
+  {
+    id: 'm2',
+    category: 'Increased bleeding tendencies',
+    occurrence: '10',
+  },
+];
+
 export default UserInput;
