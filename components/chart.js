@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import { DUMMY_DATA } from './Userinput'
-
+import { DUMMY_DATA } from './Userinput';
 
 function RadarChart() {
   const chartRef = useRef(null);
@@ -14,6 +13,15 @@ function RadarChart() {
     };
   }, []);
 
+  const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   const buildChart = () => {
     if (chartRef.current) {
       const myChartRef = chartRef.current.getContext('2d');
@@ -21,33 +29,51 @@ function RadarChart() {
         destroyChart();
       }
 
-      const datasets = [];
+      const categories = new Set(DUMMY_DATA.map((data) => data.category));
+      const categoryData = {};
 
-      // Generate random color for each dataset
-      const getRandomColor = () => {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      };
+      // Initialize categoryData object with category as keys
+      categories.forEach((category) => {
+        categoryData[category] = { occurrence: 0, datasets: [] };
+      });
 
-      // Add dataset for each id number
+      // Calculate total occurrence for each category and create datasets
       DUMMY_DATA.forEach((data) => {
-        datasets.push({
+        const category = data.category;
+        const occurrence = data.occurrence;
+
+        categoryData[category].occurrence += occurrence;
+
+        categoryData[category].datasets.push({
           label: `Dataset ${data.id}`,
-          data: [data.occurrence], // You can modify this based on your data structure
+          data: [occurrence],
           backgroundColor: getRandomColor(),
           borderColor: getRandomColor(),
           borderWidth: 1,
         });
       });
 
+      const datasets = [];
+
+      // Combine occurrence for each category and create stacked dataset
+      Object.keys(categoryData).forEach((category) => {
+        const { occurrence, datasets: categoryDatasets } = categoryData[category];
+
+        datasets.push({
+          label: `Category ${category}`,
+          data: [occurrence],
+          backgroundColor: getRandomColor(),
+          borderColor: getRandomColor(),
+          borderWidth: 1,
+          stack: category, // Assign the category as the stack to stack datasets together
+          categoryDatasets, // Store individual datasets for later reference
+        });
+      });
+
       chart = new Chart(myChartRef, {
         type: 'radar',
         data: {
-          labels: DUMMY_DATA.map((data) => data.category),
+          labels: Array.from(categories),
           datasets: datasets,
         },
         options: {

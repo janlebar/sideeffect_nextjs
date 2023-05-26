@@ -82,13 +82,18 @@ function UserInput(args) {
 
 export const DUMMY_DATA = [
   {
-    id: 'm1',
+    id: '1',
     category: 'Dyspepsia',
     occurrence: '10',
   },
   {
-    id: 'm2',
+    id: '2',
     category: 'Increased bleeding tendencies',
+    occurrence: '10',
+  },
+  {
+    id: '3',
+    category: 'Dyspepsia',
     occurrence: '10',
   },
 ];
