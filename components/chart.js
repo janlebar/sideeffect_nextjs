@@ -37,12 +37,34 @@ function RadarChart() {
         categoryData[category] = { occurrence: 0, datasets: [] };
       });
 
-      // Calculate total occurrence for each category and create datasets
+      // // Calculate total occurrence for each category and create datasets
+      // DUMMY_DATA.forEach((data) => {
+      //   const category = data.category;
+      //   const occurrence = data.occurrence;
+
+      //   categoryData[category].occurrence += occurrence;
+
+      //   categoryData[category].datasets.push({
+      //     label: `Dataset ${data.id}`,
+      //     data: [occurrence],
+      //     backgroundColor: getRandomColor(),
+      //     borderColor: getRandomColor(),
+      //     borderWidth: 1,
+      //   });
+      // });
+
+            // Calculate total occurrence for each category and create datasets
       DUMMY_DATA.forEach((data) => {
         const category = data.category;
         const occurrence = data.occurrence;
 
-        categoryData[category].occurrence += occurrence;
+        if (categoryData[category]) {
+          // Category already exists, add the occurrence to the existing value
+          categoryData[category].occurrence += occurrence;
+        } else {
+          // Category does not exist, create a new entry
+          categoryData[category] = { occurrence, datasets: [] };
+        }
 
         categoryData[category].datasets.push({
           label: `Dataset ${data.id}`,
