@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Userinput from '../components/Userinput';
 import MainNavigation from '../components/layout/MainNavigation';
 import RadarChart from '../components/chart';
+import PieChart from '../components/chartpie';
 
 // Component function declaration
 export default function MyComponent() {
@@ -23,6 +24,7 @@ export default function MyComponent() {
     setData(data); iz tu gre set data v radar chart KOMPONENTO: <RadarChart data={data}/>*/}
         <Userinput onData={onData} />
         <RadarChart data={data}/>
+        <PieChart data={data}/>
     </div>
   );
 }

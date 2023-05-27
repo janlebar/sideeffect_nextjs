@@ -37,22 +37,6 @@ function RadarChart() {
         categoryData[category] = { occurrence: 0, datasets: [] };
       });
 
-      // // Calculate total occurrence for each category and create datasets
-      // DUMMY_DATA.forEach((data) => {
-      //   const category = data.category;
-      //   const occurrence = data.occurrence;
-
-      //   categoryData[category].occurrence += occurrence;
-
-      //   categoryData[category].datasets.push({
-      //     label: `Dataset ${data.id}`,
-      //     data: [occurrence],
-      //     backgroundColor: getRandomColor(),
-      //     borderColor: getRandomColor(),
-      //     borderWidth: 1,
-      //   });
-      // });
-
             // Calculate total occurrence for each category and create datasets
       DUMMY_DATA.forEach((data) => {
         const category = data.category;
