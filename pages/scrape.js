@@ -4,6 +4,8 @@ import Userinput from '../components/Userinput';
 import MainNavigation from '../components/layout/MainNavigation';
 import RadarChart from '../components/chart';
 import PieChart from '../components/chartpie';
+import Card from "../components/ui/Card";
+
 
 // Component function declaration
 export default function MyComponent() {
@@ -23,8 +25,13 @@ export default function MyComponent() {
           {/* Tle pokliče funkcijo iz userinput if fetch json in seta v FUNKCIJO:function onData(data) {
     setData(data); iz tu gre set data v radar chart KOMPONENTO: <RadarChart data={data}/>*/}
         <Userinput onData={onData} />
+        <Card>
         <RadarChart data={data}/>
+        </Card>
+        <Card>
         <PieChart data={data}/>
+        </Card>
+
     </div>
   );
 }
