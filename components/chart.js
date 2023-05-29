@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { DUMMY_DATA } from './Userinput';
+import { getRandomColor } from './chart-color-scheme';
 
 function RadarChart() {
   const chartRef = useRef(null);
@@ -12,15 +13,6 @@ function RadarChart() {
       destroyChart();
     };
   }, []);
-
-  const getRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
 
   const buildChart = () => {
     if (chartRef.current) {
@@ -37,7 +29,7 @@ function RadarChart() {
         categoryData[category] = { occurrence: 0, datasets: [] };
       });
 
-            // Calculate total occurrence for each category and create datasets
+      // Calculate total occurrence for each category and create datasets
       DUMMY_DATA.forEach((data) => {
         const category = data.category;
         const occurrence = data.occurrence;
