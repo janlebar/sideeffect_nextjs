@@ -14,6 +14,8 @@ function RadarChart() {
     };
   }, []);
 
+  // console.log(args.data);
+
   const buildChart = () => {
     if (chartRef.current) {
       const myChartRef = chartRef.current.getContext('2d');
