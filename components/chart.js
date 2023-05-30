@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import { DUMMY_DATA } from './Userinput';
 import { getRandomColor } from './chart-color-scheme';
 
 function RadarChart(args) {
@@ -15,7 +14,6 @@ function RadarChart(args) {
   }, []);
 
   console.log(args.data);
-  console.log(DUMMY_DATA);
 
   const buildChart = () => {
     if (chartRef.current) {
@@ -24,7 +22,7 @@ function RadarChart(args) {
         destroyChart();
       }
 
-      const categories = new Set(DUMMY_DATA.map((data) => data.category));
+      const categories = new Set(args.data.map((data) => data.category));
       const categoryData = {};
 
       // Initialize categoryData object with category as keys
@@ -33,7 +31,7 @@ function RadarChart(args) {
       });
 
       // Calculate total occurrence for each category and create datasets
-      DUMMY_DATA.forEach((data) => {
+      args.data.forEach((data) => {
         const category = data.category;
         const occurrence = data.occurrence;
 
@@ -102,6 +100,7 @@ function RadarChart(args) {
 }
 
 export default RadarChart;
+
 
 
 // import React, { useEffect, useRef } from 'react';
