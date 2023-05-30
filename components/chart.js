@@ -3,7 +3,7 @@ import Chart from 'chart.js/auto';
 import { DUMMY_DATA } from './Userinput';
 import { getRandomColor } from './chart-color-scheme';
 
-function RadarChart() {
+function RadarChart(args) {
   const chartRef = useRef(null);
   let chart = null;
 
@@ -14,6 +14,7 @@ function RadarChart() {
     };
   }, []);
 
+  console.log(args.data);
   console.log(DUMMY_DATA);
 
   const buildChart = () => {
