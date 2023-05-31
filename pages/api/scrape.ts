@@ -1,18 +1,23 @@
-import cheerio from 'cheerio';
-import axios from 'axios';
-import { NextApiRequest, NextApiResponse } from 'next';
+import cheerio from 'cheerio'; // Importing the cheerio library which is used to parse HTML and XML documents.
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { url } = req.query;
+import axios from 'axios'; // Importing the axios library which is used to make HTTP requests.
 
-  try {
-    const { data } = await axios.get(url as string);
-    const $ = cheerio.load(data);
+import { NextApiRequest, NextApiResponse } from 'next'; // Importing the Next.js API Request and Response interfaces.
 
+export default async function handler(req: NextApiRequest, res: NextApiResponse) { // Defining the API endpoint handler function.
+  const { url } = req.query; // Destructuring the "url" query parameter from the request object.
+
+  try { // Wrapping the code in a try-catch block to handle any errors that may occur.
+    const { data } = await axios.get(url as string); // Making an HTTP GET request to the URL specified in the "url" query parameter.
+    const $ = cheerio.load(data); // Parsing the HTML content using cheerio.
+
+    // vsi h3 naslovi za #professional-info elementom
     const allTitles = $('.contentBox #professional-info').nextAll("h3").get();
 
+    // lista vseh simptomov
     const results = [];
 
+    // regex ki matcha elemente med posameznimi kategorijami simptomov in dobi occurance, from, to in list simptomov
     const regex = /(Rare|Common|Uncommon)\s\((\d+(?:\.\d+)?)%\s(to)\s(\d+(?:\.\d+)?)%\):\s(.+)/;
 
     let id = 1; // Add an id counter
