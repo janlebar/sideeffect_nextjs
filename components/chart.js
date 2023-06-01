@@ -1,8 +1,113 @@
+// import React, { useEffect, useRef } from 'react';
+// import Chart from 'chart.js/auto';
+// import { getRandomColor } from './chart-color-scheme';
+
+// function RadarChart(args) {
+//   const chartRef = useRef(null);
+//   let chart = null;
+
+//   useEffect(() => {
+//     buildChart();
+//     return () => {
+//       destroyChart();
+//     };
+//   }, []);
+
+//   console.log(args.data);
+
+//   const buildChart = () => {
+//     if (chartRef.current) {
+//       const myChartRef = chartRef.current.getContext('2d');
+//       if (chart) {
+//         destroyChart();
+//       }
+
+//       const categories = new Set(args.data.map((data) => data.category));
+//       const categoryData = {};
+
+//       // Initialize categoryData object with category as keys
+//       categories.forEach((category) => {
+//         categoryData[category] = { occurrence: 0, datasets: [] };
+//       });
+
+//       // Calculate total occurrence for each category and create datasets
+//       args.data.forEach((data) => {
+//         const category = data.category;
+//         const occurrence = data.occurrence;
+
+//         if (categoryData[category]) {
+//           // Category already exists, add the occurrence to the existing value
+//           categoryData[category].occurrence += occurrence;
+//         } else {
+//           // Category does not exist, create a new entry
+//           categoryData[category] = { occurrence, datasets: [] };
+//         }
+
+//         categoryData[category].datasets.push({
+//           label: `Dataset ${data.id}`,
+//           data: [occurrence],
+//           backgroundColor: getRandomColor(),
+//           borderColor: getRandomColor(),
+//           borderWidth: 1,
+//         });
+//       });
+
+//       const datasets = [];
+
+//       // Combine occurrence for each category and create stacked dataset
+//       Object.keys(categoryData).forEach((category) => {
+//         const { occurrence, datasets: categoryDatasets } = categoryData[category];
+
+//         datasets.push({
+//           label: `Category ${category}`,
+//           data: [occurrence],
+//           backgroundColor: getRandomColor(),
+//           borderColor: getRandomColor(),
+          
+//           borderWidth: 1,
+//           stack: category, // Assign the category as the stack to stack datasets together
+//           categoryDatasets, // Store individual datasets for later reference
+//         });
+//       });
+
+//       chart = new Chart(myChartRef, {
+//         type: 'radar',
+//         data: {
+//           labels: Array.from(categories),
+//           datasets: datasets,
+//         },
+//         options: {
+//           scales: {
+//             r: {
+//               ticks: {
+//                 beginAtZero: true,
+//                 max: 10,
+//               },
+//             },
+//           },
+//         },
+//       });
+//     }
+//   };
+
+//   const destroyChart = () => {
+//     if (chart) {
+//       chart.destroy();
+//       chart = null;
+//     }
+//   };
+
+//   return <canvas ref={chartRef}></canvas>;
+// }
+
+// export default RadarChart;
+
+
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { getRandomColor } from './chart-color-scheme';
 
-function RadarChart(args) {
+function RadarChart({ data }) {
   const chartRef = useRef(null);
   let chart = null;
 
@@ -13,8 +118,6 @@ function RadarChart(args) {
     };
   }, []);
 
-  console.log(args.data);
-
   const buildChart = () => {
     if (chartRef.current) {
       const myChartRef = chartRef.current.getContext('2d');
@@ -22,7 +125,7 @@ function RadarChart(args) {
         destroyChart();
       }
 
-      const categories = new Set(args.data.map((data) => data.category));
+      const categories = new Set(data.map((dataItem) => dataItem.category));
       const categoryData = {};
 
       // Initialize categoryData object with category as keys
@@ -31,9 +134,8 @@ function RadarChart(args) {
       });
 
       // Calculate total occurrence for each category and create datasets
-      args.data.forEach((data) => {
-        const category = data.category;
-        const occurrence = data.occurrence;
+      data.forEach((dataItem) => {
+        const { category, occurrence } = dataItem;
 
         if (categoryData[category]) {
           // Category already exists, add the occurrence to the existing value
@@ -44,11 +146,12 @@ function RadarChart(args) {
         }
 
         categoryData[category].datasets.push({
-          label: `Dataset ${data.id}`,
+          label: `Dataset ${dataItem.id}`,
           data: [occurrence],
           backgroundColor: getRandomColor(),
           borderColor: getRandomColor(),
           borderWidth: 1,
+          fill: '-1',
         });
       });
 
@@ -64,6 +167,7 @@ function RadarChart(args) {
           backgroundColor: getRandomColor(),
           borderColor: getRandomColor(),
           borderWidth: 1,
+          fill: true,
           stack: category, // Assign the category as the stack to stack datasets together
           categoryDatasets, // Store individual datasets for later reference
         });
@@ -82,6 +186,44 @@ function RadarChart(args) {
                 beginAtZero: true,
                 max: 10,
               },
+              pointLabels: {
+                font: {
+                  size: 14,
+                  weight: 'bold',
+                },
+              },
+              grid: {
+                color: '#c1c1c1',
+                circular: true,
+              },
+              angleLines: {
+                color: '#c1c1c1',
+              },
+              lineArc: true,
+            },
+          },
+          elements: {
+            line: {
+              tension: 0.4,
+              borderWidth: 1,
+            },
+            point: {
+              radius: 4,
+              hitRadius: 10,
+              hoverRadius: 6,
+              borderWidth: 1,
+            },
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'bottom',
+              labels: {
+                font: {
+                  size: 14,
+                  weight: 'bold',
+                },
+              },
             },
           },
         },
@@ -99,8 +241,7 @@ function RadarChart(args) {
   return <canvas ref={chartRef}></canvas>;
 }
 
-export default RadarChart;
-
+export default RadarChart
 
 
 
