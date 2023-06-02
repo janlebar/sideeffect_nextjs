@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Form from './Form';
+import RadarChart from './chart';
 
 function UserInput(args) {
-
   // Set up state variables for the scraped data and the URL inputs
   let [data, setData] = useState([]);
   const [hasError, setError] = useState(false);
@@ -20,7 +20,7 @@ function UserInput(args) {
     const scrapedData = await response.json();
 
     // appenda nove skrejpane simptome na list obstojecih skrejpanih simptomov
-    setData(oldData => [...oldData, scrapedData]);
+    setData((oldData) => [...oldData, scrapedData]);
     setError(false);
 
     args.onData(scrapedData);
@@ -62,40 +62,26 @@ function UserInput(args) {
       {/* Button to add a new URL input field */}
       <button onClick={handleAddInput}>Add Input</button>
       {/* Map over the scraped data to render each set of data */}
-      {data.map((sideEffects, index) =>
+      {data.map((sideEffects, index) => (
         <div key={index}>
           {sideEffects.map((scrapedData, index) => (
             <div key={index}>
               <h2>{scrapedData.category}</h2>
-              <b>{scrapedData.occurrence} ({scrapedData.from} to {scrapedData.to})</b>
-              <br/>
-              {scrapedData.symptoms && <b>{scrapedData.symptoms.join(", ")}</b>}
+              <b>
+                {scrapedData.occurrence} ({scrapedData.from} to {scrapedData.to})
+              </b>
+              <br />
+              {scrapedData.symptoms && <b>{scrapedData.symptoms.join(', ')}</b>}
               {/* Use dangerouslySetInnerHTML to render the scraped HTML */}
               {/*<div dangerouslySetInnerHTML={{ __html: scrapedData.content }}></div>*/}
             </div>
           ))}
+          {/* Render RadarChart for each set of data */}
+          <RadarChart data={sideEffects} />
         </div>
-      )}
+      ))}
     </div>
   );
 }
-
-export const DUMMY_DATA = [
-  {
-    id: '1',
-    category: 'Dyspepsia',
-    occurrence: '10',
-  },
-  {
-    id: '2',
-    category: 'Increased bleeding tendencies',
-    occurrence: '10',
-  },
-  {
-    id: '3',
-    category: 'Dyspepsia',
-    occurrence: '10',
-  },
-];
 
 export default UserInput;
