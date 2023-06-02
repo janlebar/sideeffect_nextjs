@@ -1,4 +1,4 @@
-import { scrape } from './scrape';
+import { scrape } from '../pages/api/scrape';
 
 let scrapeCounter = 0;
 

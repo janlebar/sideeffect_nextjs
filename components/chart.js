@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { getRandomColor } from './chart-color-scheme';
+import { getScrapeCounter } from './CounterForChartLayers.js';
+
+console.log('Scrape counter:', getScrapeCounter());
 
 function RadarChart({ data, numberOfLayers }) {
   const chartRef = useRef(null);

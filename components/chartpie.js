@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import { DUMMY_DATA } from './Userinput';
 import { getRandomColor } from './chart-color-scheme';
 
+
 function PieChart() {
   const chartRef = useRef(null);
   let chart = null;
