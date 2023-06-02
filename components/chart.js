@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { getRandomColor } from './chart-color-scheme';
 
-function RadarChart(args) {
+function RadarChart({ data, numberOfLayers }) {
   const chartRef = useRef(null);
   let chart = null;
 
@@ -13,8 +13,6 @@ function RadarChart(args) {
     };
   }, []);
 
-  console.log(args.data);
-
   const buildChart = () => {
     if (chartRef.current) {
       const myChartRef = chartRef.current.getContext('2d');
@@ -22,7 +20,7 @@ function RadarChart(args) {
         destroyChart();
       }
 
-      const categories = new Set(args.data.map((data) => data.category));
+      const categories = new Set(data.map((data) => data.category));
       const categoryData = {};
 
       // Initialize categoryData object with category as keys
@@ -31,7 +29,7 @@ function RadarChart(args) {
       });
 
       // Calculate total occurrence for each category and create datasets
-      args.data.forEach((data) => {
+      data.forEach((data) => {
         const category = data.category;
         const occurrence = data.occurrence;
 
@@ -60,17 +58,25 @@ function RadarChart(args) {
 
         datasets.push({
           label: `Category ${category}`,
-          // data: [occurrence],
-          data: [3, 5, 2, 6, 7],
-
+          data: [occurrence],
           backgroundColor: getRandomColor(),
           borderColor: getRandomColor(),
-          
           borderWidth: 1,
           stack: category, // Assign the category as the stack to stack datasets together
           categoryDatasets, // Store individual datasets for later reference
         });
       });
+
+      // Add additional layers
+      for (let i = 1; i <= numberOfLayers; i++) {
+        datasets.push({
+          label: `Layer ${i}`,
+          data: Array.from({ length: categories.size }, () => Math.floor(Math.random() * 10)),
+          backgroundColor: getRandomColor(),
+          borderColor: getRandomColor(),
+          borderWidth: 1,
+        });
+      }
 
       chart = new Chart(myChartRef, {
         type: 'radar',
@@ -103,5 +109,3 @@ function RadarChart(args) {
 }
 
 export default RadarChart;
-
-
