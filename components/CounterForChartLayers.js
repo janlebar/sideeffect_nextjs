@@ -19,3 +19,8 @@ export const getScrapeCounter = () => {
 export const resetScrapeCounter = () => {
   scrapeCounter = 0;
 };
+
+
+
+
+

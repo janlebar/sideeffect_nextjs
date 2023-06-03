@@ -1,14 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { getRandomColor } from './chart-color-scheme';
 import { getScrapeCounter } from './CounterForChartLayers.js';
 
-console.log('Scrape counter:', getScrapeCounter());
-
-
-
 function RadarChart({ data, numberOfLayers }) {
   const chartRef = useRef(null);
+  const [scrapeCounter, setScrapeCounter] = useState(0);
   let chart = null;
 
   useEffect(() => {
@@ -17,6 +14,10 @@ function RadarChart({ data, numberOfLayers }) {
       destroyChart();
     };
   }, []);
+
+  useEffect(() => {
+    setScrapeCounter(getScrapeCounter());
+  }, [scrapeCounter]);
 
   const buildChart = () => {
     if (chartRef.current) {
@@ -110,7 +111,10 @@ function RadarChart({ data, numberOfLayers }) {
     }
   };
 
-  return <canvas ref={chartRef}></canvas>;
+
+console.log('Scrape counter:', scrapeCounter);
+
+return <canvas ref={chartRef}></canvas>;
 }
 
 export default RadarChart;
