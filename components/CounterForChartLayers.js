@@ -4,9 +4,12 @@ let scrapeCounter = 0;
 
 export const counter = async () => {
   try {
-    await scrape(); // Call the scrape function from scrape.ts
+    await scrape();
     scrapeCounter++;
     console.log(`Scrape count: ${scrapeCounter}`);
+
+    // Add this line to check the counter value within the function
+    console.log('Counter value within counter function:', scrapeCounter);
   } catch (error) {
     console.error('Error occurred during scraping:', error);
   }
@@ -19,8 +22,5 @@ export const getScrapeCounter = () => {
 export const resetScrapeCounter = () => {
   scrapeCounter = 0;
 };
-
-
-
 
 

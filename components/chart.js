@@ -5,7 +5,7 @@ import { getScrapeCounter } from './CounterForChartLayers.js';
 
 function RadarChart({ data, numberOfLayers }) {
   const chartRef = useRef(null);
-  const [scrapeCounter, setScrapeCounter] = useState(0);
+  const [scrapeCounter, setScrapeCounter] = useState(getScrapeCounter());
   let chart = null;
 
   useEffect(() => {
@@ -18,6 +18,8 @@ function RadarChart({ data, numberOfLayers }) {
   useEffect(() => {
     setScrapeCounter(getScrapeCounter());
   }, [scrapeCounter]);
+//this belw can cause error if here 
+  // console.log('Scrape counter:', scrapeCounter);
 
   const buildChart = () => {
     if (chartRef.current) {
@@ -112,7 +114,7 @@ function RadarChart({ data, numberOfLayers }) {
   };
 
 
-console.log('Scrape counter:', scrapeCounter);
+
 
 return <canvas ref={chartRef}></canvas>;
 }
