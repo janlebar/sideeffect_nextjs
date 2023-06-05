@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { getRandomColor } from './chart-color-scheme';
-import { getScrapeCounter } from './CounterForChartLayers.js';
 
-function RadarChart({ data, numberOfLayers }) {
+function RadarChart({ data }) {
   const chartRef = useRef(null);
-  const [scrapeCounter, setScrapeCounter] = useState(getScrapeCounter());
   let chart = null;
 
   useEffect(() => {
@@ -16,10 +14,8 @@ function RadarChart({ data, numberOfLayers }) {
   }, []);
 
   useEffect(() => {
-    setScrapeCounter(getScrapeCounter());
-  }, [scrapeCounter]);
-//this belw can cause error if here 
-  // console.log('Scrape counter:', scrapeCounter);
+    console.log('RadarChart data:', data);
+  }, [data]);
 
   const buildChart = () => {
     if (chartRef.current) {
@@ -75,17 +71,6 @@ function RadarChart({ data, numberOfLayers }) {
         });
       });
 
-      // Add additional layers
-      for (let i = 1; i <= numberOfLayers; i++) {
-        datasets.push({
-          label: `Layer ${i}`,
-          data: Array.from({ length: categories.size }, () => Math.floor(Math.random() * 10)),
-          backgroundColor: getRandomColor(),
-          borderColor: getRandomColor(),
-          borderWidth: 1,
-        });
-      }
-
       chart = new Chart(myChartRef, {
         type: 'radar',
         data: {
@@ -113,10 +98,7 @@ function RadarChart({ data, numberOfLayers }) {
     }
   };
 
-
-
-
-return <canvas ref={chartRef}></canvas>;
+  return <canvas ref={chartRef}></canvas>;
 }
 
 export default RadarChart;

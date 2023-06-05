@@ -12,7 +12,7 @@ function UserInput(args) {
   const handleScrape = async (urlInput) => {
     const response = await fetch(`/api/scrape?url=https://www.drugs.com/sfx/${urlInput}-side-effects.html`);
     if (!response.ok) {
-      setError(true);
+      setError(true);333
       return;
     }
 
