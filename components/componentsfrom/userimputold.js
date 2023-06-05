@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Form from '../Form';
+import Form from './Form';
 
 function UserInput(args) {
 
@@ -26,6 +26,8 @@ function UserInput(args) {
     args.onData(scrapedData);
   };
 
+
+  
   // Function to handle form submission for a given URL input
   const handleSubmit = (event, index) => {
     event.preventDefault();
@@ -44,6 +46,11 @@ function UserInput(args) {
     setUrlInputs((prevInputs) => [...prevInputs, '']);
   };
 
+    // // THIS IS HOW MAKE A NEW LAYER TO CHART CAN BE MADE
+    // const handleAddInput = () => {
+    //   setUrlInputs((prevInputs) => [...prevInputs, '']);
+    // };
+
   if (hasError) {
     return <a>Fetch Error</a>;
   }
@@ -59,25 +66,33 @@ function UserInput(args) {
           onChange={(event) => handleChange(event, index)}
         />
       ))}
+  
       {/* Button to add a new URL input field */}
       <button onClick={handleAddInput}>Add Input</button>
+  
       {/* Map over the scraped data to render each set of data */}
-      {data.map((sideEffects, index) =>
+      {data.map((sideEffects, index) => (
         <div key={index}>
+          {/* Map over each side effect data */}
           {sideEffects.map((scrapedData, index) => (
             <div key={index}>
               <h2>{scrapedData.category}</h2>
-              <b>{scrapedData.occurance} ({scrapedData.from} to {scrapedData.to})</b>
+              <b>{scrapedData.occurrence} ({scrapedData.from} to {scrapedData.to})</b>
               <br/>
-              <b>{scrapedData.symptoms.join(", ")}</b>
-              {/* Use dangerouslySetInnerHTML to render the scraped HTML */}
-              {/*<div dangerouslySetInnerHTML={{ __html: scrapedData.content }}></div>*/}
+              {/* Render symptoms if they exist */}
+              {scrapedData.symptoms && <b>{scrapedData.symptoms.join(", ")}</b>}
+  
+              {/* Render scraped HTML content (commented out) */}
+              {/* <div dangerouslySetInnerHTML={{ __html: scrapedData.content }}></div> */}
             </div>
           ))}
         </div>
-      )}
+      ))}
     </div>
   );
+  
 }
+
+
 
 export default UserInput;

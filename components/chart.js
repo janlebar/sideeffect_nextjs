@@ -1,26 +1,32 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { getRandomColor } from './chart-color-scheme';
-import { getScrapeCounter } from './CounterForChartLayers.js';
 
-function RadarChart({ data, numberOfLayers }) {
+function RadarChart({ data }) {
   const chartRef = useRef(null);
-  const [scrapeCounter, setScrapeCounter] = useState(getScrapeCounter());
   let chart = null;
 
+  // useEffect is used to run code when the component mounts or when the 'data' prop changes
+  // useEffect(() => {
+  //   buildChart();
+  //   return () => {
+  //     destroyChart();
+  //   };
+  // }, [data]);
+
   useEffect(() => {
+    console.log('useEffect called');
     buildChart();
+    
     return () => {
+      console.log('Cleanup function called');
       destroyChart();
     };
-  }, []);
+  }, [data]);
 
-  useEffect(() => {
-    setScrapeCounter(getScrapeCounter());
-  }, [scrapeCounter]);
-//this belw can cause error if here 
-  // console.log('Scrape counter:', scrapeCounter);
 
+
+  // This function builds the RadarChart using Chart.js library
   const buildChart = () => {
     if (chartRef.current) {
       const myChartRef = chartRef.current.getContext('2d');
@@ -28,24 +34,21 @@ function RadarChart({ data, numberOfLayers }) {
         destroyChart();
       }
 
+      // Process the data and create datasets for the chart
       const categories = new Set(data.map((data) => data.category));
       const categoryData = {};
 
-      // Initialize categoryData object with category as keys
       categories.forEach((category) => {
         categoryData[category] = { occurrence: 0, datasets: [] };
       });
 
-      // Calculate total occurrence for each category and create datasets
       data.forEach((data) => {
         const category = data.category;
-        const occurrence = data.occurrence;
+        const occurrence = parseFloat(data.occurrence);
 
         if (categoryData[category]) {
-          // Category already exists, add the occurrence to the existing value
           categoryData[category].occurrence += occurrence;
         } else {
-          // Category does not exist, create a new entry
           categoryData[category] = { occurrence, datasets: [] };
         }
 
@@ -60,52 +63,39 @@ function RadarChart({ data, numberOfLayers }) {
 
       const datasets = [];
 
-      // Combine occurrence for each category and create stacked dataset
       Object.keys(categoryData).forEach((category) => {
         const { occurrence, datasets: categoryDatasets } = categoryData[category];
 
         datasets.push({
-          label: `Category ${category}`,
+          label: category,
           data: [occurrence],
           backgroundColor: getRandomColor(),
           borderColor: getRandomColor(),
           borderWidth: 1,
-          stack: category, // Assign the category as the stack to stack datasets together
-          categoryDatasets, // Store individual datasets for later reference
+        });
+
+        categoryDatasets.forEach((dataset) => {
+          datasets.push(dataset);
         });
       });
 
-      // Add additional layers
-      for (let i = 1; i <= numberOfLayers; i++) {
-        datasets.push({
-          label: `Layer ${i}`,
-          data: Array.from({ length: categories.size }, () => Math.floor(Math.random() * 10)),
-          backgroundColor: getRandomColor(),
-          borderColor: getRandomColor(),
-          borderWidth: 1,
-        });
-      }
+      console.log(data);
 
+      // Create the chart instance
       chart = new Chart(myChartRef, {
         type: 'radar',
         data: {
-          labels: Array.from(categories),
-          datasets: datasets,
+          labels: ['Occurrence'],
+          datasets,
         },
         options: {
-          scales: {
-            r: {
-              ticks: {
-                beginAtZero: true,
-                max: 10,
-              },
-            },
-          },
+          // chart options
         },
       });
     }
   };
 
+  // This function destroys the chart instance to prevent memory leaks
   const destroyChart = () => {
     if (chart) {
       chart.destroy();
@@ -113,10 +103,7 @@ function RadarChart({ data, numberOfLayers }) {
     }
   };
 
-
-
-
-return <canvas ref={chartRef}></canvas>;
+  return <canvas ref={chartRef}></canvas>;
 }
 
 export default RadarChart;
