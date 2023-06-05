@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Form from './Form';
-import RadarChart from './chart';
+// import RadarChart from './chart';
 
 function UserInput(args) {
-  const [data, setData] = useState([]);
+  let [data, setData] = useState([]);
   const [hasError, setError] = useState(false);
   const [urlInputs, setUrlInputs] = useState(['']);
 
@@ -15,17 +15,25 @@ function UserInput(args) {
         setError(true);
         return;
       }
+
+      // tuki je output za json za izpis in za CHART KOMPONENTO samo prej //radar set data v scrape.js
       const scrapedData = await response.json();
+      
+   // appenda nove skrejpane simptome na list obstojecih skrejpanih simptomov
       setData((oldData) => [...oldData, scrapedData]);
       setError(false);
+
       args.onData(scrapedData);
-    } catch (error) {
+    } 
+    catch (error) {
       setError(true);
       console.error(error);
     }
   };
 
-  // Function to handle form submission and trigger data fetching
+
+  // isto k prej
+  // Function to handle form submission for a given URL input and trigger data fetching
   const handleSubmit = (event, index) => {
     event.preventDefault();
     handleScrape(urlInputs[index]);
@@ -42,6 +50,11 @@ function UserInput(args) {
   const handleAddInput = () => {
     setUrlInputs((prevInputs) => [...prevInputs, '']);
   };
+
+     // // THIS IS HOW MAKE A NEW LAYER TO CHART CAN BE MADE
+    // const handleAddInput = () => {
+    //   setUrlInputs((prevInputs) => [...prevInputs, '']);
+    // };
 
   if (hasError) {
     return <a>Fetch Error</a>;
@@ -60,8 +73,9 @@ function UserInput(args) {
       ))}
       {/* Button to add additional input fields */}
       <button onClick={handleAddInput}>Add Input</button>
+      
       {/* Render the RadarChart component */}
-      <RadarChart data={data} />
+      {/* <RadarChart data={data} /> */}
     </div>
   );
 }

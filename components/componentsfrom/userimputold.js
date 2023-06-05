@@ -12,7 +12,7 @@ function UserInput(args) {
   const handleScrape = async (urlInput) => {
     const response = await fetch(`/api/scrape?url=https://www.drugs.com/sfx/${urlInput}-side-effects.html`);
     if (!response.ok) {
-      setError(true);333
+      setError(true);
       return;
     }
 
@@ -26,6 +26,8 @@ function UserInput(args) {
     args.onData(scrapedData);
   };
 
+
+  
   // Function to handle form submission for a given URL input
   const handleSubmit = (event, index) => {
     event.preventDefault();

@@ -7,12 +7,24 @@ function RadarChart({ data }) {
   let chart = null;
 
   // useEffect is used to run code when the component mounts or when the 'data' prop changes
+  // useEffect(() => {
+  //   buildChart();
+  //   return () => {
+  //     destroyChart();
+  //   };
+  // }, [data]);
+
   useEffect(() => {
+    console.log('useEffect called');
     buildChart();
+    
     return () => {
+      console.log('Cleanup function called');
       destroyChart();
     };
   }, [data]);
+
+
 
   // This function builds the RadarChart using Chart.js library
   const buildChart = () => {
@@ -66,6 +78,8 @@ function RadarChart({ data }) {
           datasets.push(dataset);
         });
       });
+
+      console.log(data);
 
       // Create the chart instance
       chart = new Chart(myChartRef, {
