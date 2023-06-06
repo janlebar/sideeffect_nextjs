@@ -6,12 +6,27 @@ function RadarChart({ data }) {
   const chartRef = useRef(null);
   let chart = null;
 
+  // useEffect(() => {
+  //   buildChart();
+  //   return () => {
+  //     destroyChart();
+  //   };
+  // }, [data]);
+
+
   useEffect(() => {
+    // This useEffect hook is used to run code when the component mounts or when the 'data' prop changes
+    console.log('useEffect called');
     buildChart();
+    
     return () => {
+      // Cleanup function called when the component unmounts or when the 'data' prop changes
+      console.log('Cleanup function called');
       destroyChart();
     };
   }, [data]);
+
+
 
   const buildChart = () => {
     if (chartRef.current) {
