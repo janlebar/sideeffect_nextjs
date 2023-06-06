@@ -76,6 +76,30 @@ function UserInput(args) {
       
       {/* Render the RadarChart component */}
       {/* <RadarChart data={data} /> */}
+
+
+
+
+            {/* Če hočeš izpisat v rendru data: Map over the scraped data to render each set of data */}
+            {data.map((sideEffects, index) => (
+        <div key={index}>
+          {/* Map over each side effect data */}
+          {sideEffects.map((scrapedData, index) => (
+            <div key={index}>
+              <h2>{scrapedData.category}</h2>
+              <b>{scrapedData.occurrence} ({scrapedData.from} to {scrapedData.to})</b>
+              <br/>
+              {/* Render symptoms if they exist */}
+              {scrapedData.symptoms && <b>{scrapedData.symptoms.join(", ")}</b>}
+  
+              {/* Render scraped HTML content (commented out) */}
+              {/* <div dangerouslySetInnerHTML={{ __html: scrapedData.content }}></div> */}
+            </div>
+          ))}
+        </div>
+      ))}
+
+      
     </div>
   );
 }
