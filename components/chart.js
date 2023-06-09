@@ -34,7 +34,7 @@ function RadarChart({ data }) {
       if (chart) {
         destroyChart();
       }
-
+      console.log(data);
       const categories = new Set(data.map((data) => data.category));
       const categoryData = {};
 
@@ -110,6 +110,7 @@ function RadarChart({ data }) {
   };
 
   return <canvas ref={chartRef}></canvas>;
+
 }
 
 export default RadarChart;

@@ -33,6 +33,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           occurrence: matches[4], // Update the occurrence to the fourth captured group
         });
 
+        // results.push({
+        //   category: $(h3).text(), // Dobimo besedilo znotraj elementa <h3> in ga dodelimo lastnosti 'category'
+        //   occurance: matches[1], // Dodelimo vrednost prve ujete skupine v polju 'matches' lastnosti 'occurance'
+        //   from: parseFloat(matches[2]), // Parsiramo vrednost druge ujete skupine v polju 'matches' kot število s plavajočo vejico in jo dodelimo lastnosti 'from'
+        //   to: parseFloat(matches[4]), // Parsiramo vrednost četrte ujete skupine v polju 'matches' kot število s plavajočo vejico in jo dodelimo lastnosti 'to'
+        //   symptoms: matches[5].split(", ") // splitaj text po vejici, Razdelimo besedilo v peti ujeti skupini v polju 'matches' glede na vejico in presledek ter ustvarimo polje simptomov, ki ga dodelimo lastnosti 'symptoms'
+        // });
+
+
+
         id++; // Increment the id counter
       }
     }
@@ -42,6 +52,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(500).json({ error: error.message });
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
