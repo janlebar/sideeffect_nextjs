@@ -1,9 +1,7 @@
 import React from 'react';
-import Buttons from './Buttons';
 
-function Form({ urlInput, onSubmit, onChange }) {
+function Form({ urlInput, onSubmit, onChange, onClearData }) {
   return (
-    
     <form className="bg-white p-6 shadow-md rounded-md" onSubmit={onSubmit}>
       <label className="block mb-4">
         Enter drug name:
@@ -15,11 +13,14 @@ function Form({ urlInput, onSubmit, onChange }) {
         />
       </label>
       <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md" type="submit">
-        Scrape Data
+        Look for side effect
       </button>
-      <Buttons />
+      <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md ml-4" onClick={onClearData}>
+        Clear Data
+      </button>
     </form>
   );
 }
 
 export default Form;
+

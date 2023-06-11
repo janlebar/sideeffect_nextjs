@@ -7,6 +7,10 @@ function UserInput(args) {
   const [hasError, setError] = useState(false);
   const [urlInputs, setUrlInputs] = useState(['']);
 
+  const handleClearData = () => {
+    setData([]);
+  };
+  
   // Function to handle fetching data from an API endpoint and updating the component state
   const handleScrape = async (urlInput) => {
     try {
@@ -30,6 +34,7 @@ function UserInput(args) {
       console.error(error);
     }
   };
+
 
 
   // isto k prej
@@ -64,12 +69,13 @@ function UserInput(args) {
     <div>
       {/* Render form inputs */}
       {urlInputs.map((urlInput, index) => (
-        <Form
-          key={index}
-          urlInput={urlInput}
-          onSubmit={(event) => handleSubmit(event, index)}
-          onChange={(event) => handleChange(event, index)}
-        />
+<Form
+  key={index}
+  urlInput={urlInput}
+  onSubmit={(event) => handleSubmit(event, index)}
+  onChange={(event) => handleChange(event, index)}
+  onClearData={handleClearData}
+/>
       ))}
       {/* Button to add additional input fields */}
       <button onClick={handleAddInput}>Add Input</button>
