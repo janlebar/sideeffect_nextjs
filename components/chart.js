@@ -17,7 +17,7 @@ function RadarChart({ data }) {
   useEffect(() => {
     // This useEffect hook is used to run code when the component mounts or when the 'data' prop changes
     console.log('useEffect called');
-    buildChart();
+    buildChart2();
     
     return () => {
       // Cleanup function called when the component unmounts or when the 'data' prop changes
@@ -26,6 +26,66 @@ function RadarChart({ data }) {
     };
   }, [data]);
 
+  const buildChart2 = () => {
+    if (!chartRef.current) return;
+    if (chart) {
+      destroyChart();
+    }
+
+    const myChartRef = chartRef.current.getContext('2d');
+
+    const groupByMedicine = {};
+    for (const entry of data) {
+      if (!(entry.medicine in groupByMedicine)) {
+        groupByMedicine[entry.medicine] = [];
+      }
+
+      groupByMedicine[entry.medicine].push(entry);
+    }
+
+    console.log(data);
+
+    const categories = new Set(data.map((data) => data.category));
+
+    const datasets = [];
+    for (const [medicineName, symptoms] of Object.entries(groupByMedicine)) {
+      const occurrences = {};
+      for (const category of categories) {
+        if (category in occurrences) continue;
+        const symptom = symptoms.find((symptom) => symptom.category == category);
+
+        occurrences[category] = symptom.occurrence;
+      }
+
+      datasets.push({
+        label: `Dataset ${medicineName}`,
+        data: Object.values(occurrences),
+        backgroundColor: getRandomColor(),
+        borderColor: getRandomColor(),
+        borderWidth: 1,
+      });
+    }
+
+    console.log(datasets);
+
+    chart = new Chart(myChartRef, {
+      type: 'radar',
+      data: {
+        labels: Array.from(categories),
+        datasets: datasets,
+      },
+      options: {
+        scales: {
+          r: {
+            ticks: {
+              beginAtZero: true,
+              max: 10,
+            },
+          },
+        },
+      },
+    });
+  };
 
 
   const buildChart = () => {
@@ -81,6 +141,8 @@ function RadarChart({ data }) {
           categoryDatasets, // Store individual datasets for later reference
         });
       });
+
+      console.log(categories, datasets)
 
       chart = new Chart(myChartRef, {
         type: 'radar',
