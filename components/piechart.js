@@ -26,7 +26,7 @@ function PieChart({ data }) { // Accept 'data' as a prop
 
       // Populate labels and datasets arrays
       data.forEach((data) => {
-        labels.push(`Dataset ${data.id}`);
+        labels.push(`Dataset ${data.CattegoryId}`);
         datasets.push({
           data: [data.occurrence],
           backgroundColor: getRandomColor(),

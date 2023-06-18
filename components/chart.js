@@ -57,7 +57,7 @@ function RadarChart({ data }) {
         }
 
         categoryData[category].datasets.push({
-          label: `Dataset ${data.id}`,
+          label: `Dataset ${data.CattegoryId}`,
           data: [occurrence],
           backgroundColor: getRandomColor(),
           borderColor: getRandomColor(),

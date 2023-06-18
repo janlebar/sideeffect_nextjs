@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // regex ki matcha elemente med posameznimi kategorijami simptomov in dobi occurance, from, to in list simptomov
     const regex = /(Rare|Common|Uncommon)\s\((\d+(?:\.\d+)?)%\s(to)\s(\d+(?:\.\d+)?)%\):\s(.+)/;
 
-    let id = 1; // Add an id counter
+    let CattegoryId = 1; // Add an id counter
 
     for (const h3 of allTitles) {
       for (const content of $(h3).nextUntil('h3').get()) {
@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (!matches) continue;
 
         results.push({
-          id: id.toString(), // Assign the id as a string
+          CattegoryId: CattegoryId.toString(), // Assign the id as a string
           category: $(h3).text(),
           occurrence: matches[4], // Update the occurrence to the fourth captured group
         });
@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
 
-        id++; // Increment the id counter
+        CattegoryId++; // Increment the id counter
       }
     }
 
