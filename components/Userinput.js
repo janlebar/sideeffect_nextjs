@@ -23,6 +23,7 @@ function UserInput(args) {
       // tuki je output za json za izpis in za CHART KOMPONENTO samo prej //radar set data v scrape.js
       const scrapedData = await response.json();
 
+      // data za medicine name
       for (const data of scrapedData) {
         data.medicine = urlInput.toString();
       }
