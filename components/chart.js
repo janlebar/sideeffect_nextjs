@@ -6,6 +6,13 @@ function RadarChart({ data }) {
   const chartRef = useRef(null); // Sklic na element platna (canvas)
   let chart = null; // Sklic na primer grafikona
 
+  // useEffect(() => {
+  //   buildChart();
+  //   return () => {
+  //     destroyChart();
+  //   };
+  // }, [data]);
+
   useEffect(() => {
     console.log('Klic useEffect');
     buildChart(); // Kličemo funkcijo buildChart, ko se komponenta inicializira ali ko se spremeni prop 'data'
@@ -18,8 +25,10 @@ function RadarChart({ data }) {
 
   const buildChart = () => {
     if (!chartRef.current) return; // Prekini, če referenca chartRef ni na voljo (platno ni izrisano)
+    
+    // Uniči obstoječi grafikon, če že obstaja
     if (chart) {
-      destroyChart(); // Uniči obstoječi grafikon, če že obstaja
+      destroyChart(); 
     }
 
     const myChartRef = chartRef.current.getContext('2d'); // Pridobi 2D kontekst platna
