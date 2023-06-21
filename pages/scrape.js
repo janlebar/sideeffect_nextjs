@@ -3,6 +3,7 @@ import Userinput from '../components/Userinput';
 import MainNavigation from '../components/layout/MainNavigation';
 import RadarChart from '../components/chart';
 import PieChart from '../components/piechart';
+import RadarChartTwo from '../components/radarchart';
 import Card from "../components/ui/Card";
 
 export default function MyComponent() {
@@ -29,6 +30,9 @@ export default function MyComponent() {
         ) : (
           <p>No data available for RadarChart</p>
         )}
+      </Card>
+      <Card>
+        {<RadarChartTwo/>}
       </Card>
     </div>
   );
