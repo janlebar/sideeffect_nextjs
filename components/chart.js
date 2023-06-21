@@ -57,8 +57,8 @@ function RadarChart({ data }) {
       datasets.push({
         label: `Niz podatkov ${medicineName}`,
         data: Object.values(occurrences),
-        backgroundColor: getRandomColor(), // Dobi naključno barvo za ozadje podatkovnega niza
-        borderColor: getRandomColor(), // Dobi naključno barvo za obrobo podatkovnega niza
+        backgroundColor: getRandomColor(0.2), // Dobi naključno barvo za ozadje podatkovnega niza
+        borderColor: getRandomColor(0.2), // Dobi naključno barvo za obrobo podatkovnega niza
         borderWidth: 1,
       });
     }
