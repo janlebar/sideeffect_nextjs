@@ -15,24 +15,37 @@ function RadarChart({ data }) {
 
   useEffect(() => {
     console.log('Klic useEffect');
-    buildChart(); // Kličemo funkcijo buildChart, ko se komponenta inicializira ali ko se spremeni prop 'data'
+    buildChart(); // Kličemo funkcijo buildChart, ko se komponenta inicializira ali 
+    //ko se spremeni prop 'data'
 
     return () => {
       console.log('Klic funkcije za čiščenje');
-      destroyChart(); // Kličemo funkcijo destroyChart, ko se komponenta odstrani ali ko se spremeni prop 'data'
+      destroyChart(); // Kličemo funkcijo destroyChart, ko se komponenta odstrani ali 
+      //ko se spremeni prop 'data'
     };
   }, [data]);
 
+
+
+
+
+
+
   const buildChart = () => {
     if (!chartRef.current) return; // Prekini, če referenca chartRef ni na voljo (platno ni izrisano)
-    
+    const myChartRef = chartRef.current.getContext('2d'); // Pridobi 2D kontekst platna
+
+
     // Uniči obstoječi grafikon, če že obstaja
     if (chart) {
       destroyChart(); 
     }
 
-    const myChartRef = chartRef.current.getContext('2d'); // Pridobi 2D kontekst platna
 
+
+
+
+    
     const groupByMedicine = {}; // Objekt za združevanje podatkov po zdravilu
     for (const entry of data) {
       if (!(entry.medicine in groupByMedicine)) {
@@ -42,6 +55,7 @@ function RadarChart({ data }) {
       groupByMedicine[entry.medicine].push(entry);
     }
 
+    // assigns it a new Set object. The Set object is created by applying the map() method on the data array.
     const categories = new Set(data.map((data) => data.category)); // Množica unikatnih kategorij v podatkih
 
     const datasets = [];
@@ -51,11 +65,13 @@ function RadarChart({ data }) {
         if (category in occurrences) continue; // Preskoči, če kategorija že obstaja v objektu occurrences
         const symptom = symptoms.find((symptom) => symptom.category === category);
 
-        occurrences[category] = symptom ? symptom.occurrence : 0; // Nastavi vrednost pojavnosti, če simptom obstaja, sicer nastavi na 0
+        occurrences[category] = symptom ? symptom.occurrence : 0; // Nastavi vrednost pojavnosti, 
+        //če simptom obstaja, sicer nastavi na 0
       }
 
       datasets.push({
         label: `Niz podatkov ${medicineName}`,
+        //to spodi samo iz objekta pretvori v arej
         data: Object.values(occurrences),
         backgroundColor: getRandomColor(0.2), // Dobi naključno barvo za ozadje podatkovnega niza
         borderColor: getRandomColor(0.2), // Dobi naključno barvo za obrobo podatkovnega niza

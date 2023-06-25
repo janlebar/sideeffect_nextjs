@@ -2,6 +2,30 @@ import { useEffect, useRef } from 'react';
 import { Chart } from 'chart.js/auto';
 import { getRandomColor } from './chart-color-scheme';
 
+
+
+
+// useEffect(() => {
+//   console.log('Klic useEffect');
+//   buildChart(); // Kličemo funkcijo buildChart, ko se komponenta inicializira ali 
+//   //ko se spremeni prop 'data'
+
+//   return () => {
+//     console.log('Klic funkcije za čiščenje');
+//     destroyChart(); // Kličemo funkcijo destroyChart, ko se komponenta odstrani ali 
+//     //ko se spremeni prop 'data'
+//   };
+// }, [data]);
+
+
+
+
+
+
+
+
+
+
 const RadarChartTwo = () => {
 
       const chartRef = useRef(null);

@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
   import { getRandomColor } from './chart-color-scheme';
   
   function RadarChart({ data }) {
+    
     const chartRef = useRef(null);
     let chart = null;
 
@@ -24,6 +25,13 @@ import React, { useEffect, useRef } from 'react';
         destroyChart();
       };
     }, [data]);
+
+
+
+
+
+
+
   
     //This condition ensures that the chart is built only if the canvas element is available.
     const buildChart = () => {
@@ -35,10 +43,15 @@ import React, { useEffect, useRef } from 'react';
           destroyChart();
         }
         
+
+        
+
+        //extract the unique categories from the data 
+        //array and initialize an empty object to store category-related data.
         const categories = new Set(data.map((data) => data.category));
         const categoryData = {};
   
-        // Izračunaj podatke za posamezno kategorijo
+        // Izračuna podatke za posamezno kategorijo
         categories.forEach((category) => {
           categoryData[category] = { occurrence: 0, datasets: [] };
         });
@@ -64,7 +77,11 @@ import React, { useEffect, useRef } from 'react';
   
         const datasets = [];
   
-        // Zgradi nize podatkov za graf
+        // Zgradi nize podatkov za graf:
+        //forEach zanka se pomika čez ključe (kategorije) objekta categoryData. 
+        //Za vsako kategorijo pridobi lastnosti occurrence in datasets iz 
+        //ustreznega objekta kategorije ter jih 
+        //dodeli spremenljivkam za nadaljnjo uporabo znotraj zanke.
         Object.keys(categoryData).forEach((category) => {
           const { occurrence, datasets: categoryDatasets } = categoryData[category];
   

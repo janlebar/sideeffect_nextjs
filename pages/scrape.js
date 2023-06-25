@@ -32,8 +32,10 @@ export default function MyComponent() {
         )}
       </Card>
       <Card>
-        {<RadarChartTwo/>}
+        
+      <RadarChartTwo data={data?.medicineName} />
       </Card>
+
     </div>
   );
 }
