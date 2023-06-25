@@ -45,6 +45,14 @@ function RadarChart({ data }) {
 
 
 
+
+
+
+
+
+
+
+
     
     const groupByMedicine = {}; // Objekt za združevanje podatkov po zdravilu
     for (const entry of data) {
@@ -79,6 +87,18 @@ function RadarChart({ data }) {
       });
     }
 
+
+
+
+
+
+
+
+
+
+
+
+    
     chart = new Chart(myChartRef, {
       type: 'radar',
       data: {
@@ -97,6 +117,12 @@ function RadarChart({ data }) {
       },
     });
   };
+
+
+
+
+
+
 
   const destroyChart = () => {
     if (chart) {

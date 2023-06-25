@@ -44,7 +44,20 @@ import React, { useEffect, useRef } from 'react';
         }
         
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //extract the unique categories from the data 
         //array and initialize an empty object to store category-related data.
@@ -96,6 +109,17 @@ import React, { useEffect, useRef } from 'react';
           });
         });
   
+
+
+
+
+
+
+
+
+
+
+        
         // Ustvari graf
         chart = new Chart(myChartRef, {
           type: 'radar',
@@ -117,6 +141,20 @@ import React, { useEffect, useRef } from 'react';
       }
     };
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const destroyChart = () => {
       // Uniči obstoječi graf
       if (chart) {
