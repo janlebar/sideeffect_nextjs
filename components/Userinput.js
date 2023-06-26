@@ -91,6 +91,9 @@ function UserInput(args) {
 
 
 
+
+
+
             {/* Če hočeš izpisat v rendru data: Map over the scraped data to render each set of data */}
             {data.map((sideEffects, index) => (
         <div key={index}>
@@ -111,6 +114,11 @@ function UserInput(args) {
       ))}
 
       
+
+
+
+
+
     </div>
   );
 }
