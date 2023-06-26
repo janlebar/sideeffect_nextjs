@@ -63,20 +63,26 @@ function RadarChart({ data }) {
       groupByMedicine[entry.medicine].push(entry);
     }
 
+
+    console.log(data);
+
     // assigns it a new Set object. The Set object is created by applying the map() method on the data array.
     const categories = new Set(data.map((data) => data.category)); // Množica unikatnih kategorij v podatkih
-
     const datasets = [];
+
     for (const [medicineName, symptoms] of Object.entries(groupByMedicine)) {
       const occurrences = {}; // Objekt za shranjevanje pojavnosti vsake kategorije
       for (const category of categories) {
         if (category in occurrences) continue; // Preskoči, če kategorija že obstaja v objektu occurrences
         const symptom = symptoms.find((symptom) => symptom.category === category);
+        
+       
 
         occurrences[category] = symptom ? symptom.occurrence : 0; // Nastavi vrednost pojavnosti, 
         //če simptom obstaja, sicer nastavi na 0
       }
 
+      console.log(medicineName);
       datasets.push({
         label: `Niz podatkov ${medicineName}`,
         //to spodi samo iz objekta pretvori v arej
