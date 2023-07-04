@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from './Form';
 // import RadarChart from './chart';
 
@@ -6,6 +6,15 @@ function UserInput(args) {
   let [data, setData] = useState([]);
   const [hasError, setError] = useState(false);
   const [urlInputs, setUrlInputs] = useState(['']);
+
+  // When data changes call args.onData with new list of medicines
+  useEffect(() => {
+    if (data.length == 0) return;
+
+    console.log("scraped data", data);
+
+    args.onData(data);
+  }, [data]);
 
   const handleClearData = () => {
     setData([]);
@@ -31,8 +40,6 @@ function UserInput(args) {
    // appenda nove skrejpane simptome na list obstojecih skrejpanih simptomov
       setData((oldData) => [...oldData, scrapedData]);
       setError(false);
-
-      args.onData(scrapedData);
     } 
     catch (error) {
       setError(true);

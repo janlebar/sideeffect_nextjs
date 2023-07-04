@@ -40,49 +40,51 @@ function RadarChart({ data }) {
     if (chart) {
       destroyChart(); 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
     
-    const groupByMedicine = {}; // Objekt za združevanje podatkov po zdravilu
-    for (const entry of data) {
-      if (!(entry.medicine in groupByMedicine)) {
-        groupByMedicine[entry.medicine] = [];
+    //HERE FIRST DATA COMES IN
+    // Create a set of categories
+    const categories = new Set(); // Množica unikatnih kategorij v podatkih
+    for (const symptoms of data) {
+      for (const symptom of symptoms) {
+        categories.add(symptom.category);
       }
-
-      groupByMedicine[entry.medicine].push(entry);
     }
-
-
-    console.log(data);
-
-    // assigns it a new Set object. The Set object is created by applying the map() method on the data array.
-    const categories = new Set(data.map((data) => data.category)); // Množica unikatnih kategorij v podatkih
+    // NAJPREJ PRAZEN AREJ KI GA NAFILAS
     const datasets = [];
 
-    for (const [medicineName, symptoms] of Object.entries(groupByMedicine)) {
-      const occurrences = {}; // Objekt za shranjevanje pojavnosti vsake kategorije
-      for (const category of categories) {
-        if (category in occurrences) continue; // Preskoči, če kategorija že obstaja v objektu occurrences
-        const symptom = symptoms.find((symptom) => symptom.category === category);
-        
-       
 
-        occurrences[category] = symptom ? symptom.occurrence : 0; // Nastavi vrednost pojavnosti, 
-        //če simptom obstaja, sicer nastavi na 0
+
+    //gradis DATASET
+    for (const symptoms of data) { // Iterate over each scraped medicine
+      const medicineName = symptoms[0].medicine;//VZAMEVA PRVI SIMPTOM IN ZA NJEM IME (0=PRVI)
+
+      //OCCURENCES 
+      // We create occurences for each category
+      const occurrences = {}; // Objekt za shranjevanje pojavnosti vsake kategorije
+      for (const symptom of symptoms) { // Iterate over each symptom for medicine
+
+        //POGLEDAVA CE ZE OSTAJAJO KLJUCI TOREJ occurrences V OBJEKTU Z VSEMI SIDEEFFECTA ZA VSE
+        for (const category of categories) {
+          //POGLEDAVA CE ZE OSTAJAJO KLJUCI TOREJ occurrences V OBJEKTU Z VSEMI SIDEEFFECTA
+          if (category in occurrences) continue; // Preskoči, če kategorija že obstaja v objektu occurrences
+          const symptom = symptoms.find((symptom) => symptom.category === category);
+  
+          if (symptom) {
+            occurrences[category] = symptom.occurrence;
+          } else {
+            occurrences[category] = 0;
+          }
+          //occurrences[category] = symptom ? symptom.occurrence : 0; // Nastavi vrednost pojavnosti, 
+          //če simptom obstaja, sicer nastavi na 0
+        }
       }
 
+
+
+      
+      
       console.log(medicineName);
+
       datasets.push({
         label: `Niz podatkov ${medicineName}`,
         //to spodi samo iz objekta pretvori v arej
@@ -92,19 +94,12 @@ function RadarChart({ data }) {
         borderWidth: 1,
       });
     }
-
-
-
-
-
-
-
-
-
-
-
-
     
+
+
+
+
+
     chart = new Chart(myChartRef, {
       type: 'radar',
       data: {
