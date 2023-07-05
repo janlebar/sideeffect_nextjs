@@ -31,10 +31,10 @@ export default function MyComponent() {
           <p>No data available for RadarChart</p>
         )}
       </Card>
-      <Card>
+      {/* <Card>
         
       <RadarChartTwo data={data?.medicineName} />
-      </Card>
+      </Card> */}
 
     </div>
   );
