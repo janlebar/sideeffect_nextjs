@@ -1,8 +1,10 @@
+
+
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { getRandomColor } from './chart-color-scheme';
 
-function PieChart({ data }) { // Accept 'data' as a prop
+function PieChart({ data }) {
   const chartRef = useRef(null);
   let chart = null;
 
@@ -11,47 +13,57 @@ function PieChart({ data }) { // Accept 'data' as a prop
     return () => {
       destroyChart();
     };
-  }, [data]); // Trigger useEffect when 'data' prop changes
+  }, [data]);
 
   const buildChart = () => {
-    if (chartRef.current) {
-      const myChartRef = chartRef.current.getContext('2d');
-      if (chart) {
-        destroyChart();
+    if (!chartRef.current) return;
+    const myChartRef = chartRef.current.getContext('2d');
+
+    if (chart) {
+      destroyChart();
+    }
+    
+    const categories = new Set();
+    for (const symptoms of data) {
+      for (const symptom of symptoms) {
+        categories.add(symptom.category);
       }
+    }
+    
+    const datasets = [];
+    for (const symptoms of data) {
+      const medicineName = symptoms[0].medicine;
 
-      // Initialize arrays for labels and datasets
-      const labels = [];
-      const datasets = [];
+      const occurrences = {};
+      for (const symptom of symptoms) {
+        for (const category of categories) {
+          if (category in occurrences) continue;
+          const symptom = symptoms.find((symptom) => symptom.category === category);
 
-      // Populate labels and datasets arrays
-      data.forEach((data) => {
-        labels.push(`Dataset ${data.CattegoryId}`);
-        datasets.push({
-          data: [data.occurrence],
-          backgroundColor: getRandomColor(),
-          borderColor: getRandomColor(),
-          borderWidth: 1,
-        });
-      });
-
-      // Create a new Pie chart
-      chart = new Chart(myChartRef, {
-        type: 'pie',
-        data: {
-          labels: labels,
-          datasets: [
-            {
-              data: datasets.map((dataset) => dataset.data[0]),
-              backgroundColor: datasets.map((dataset) => dataset.backgroundColor),
-              borderColor: datasets.map((dataset) => dataset.borderColor),
-              borderWidth: datasets.map((dataset) => dataset.borderWidth),
-            },
-          ],
-        },
-        options: {},
+          if (symptom) {
+            occurrences[category] = symptom.occurrence;
+          } else {
+            occurrences[category] = 0;
+          }
+        }
+      }
+      
+      datasets.push({
+        label: `Niz podatkov ${medicineName}`,
+        data: Object.values(occurrences),
+        backgroundColor: Array.from(categories).map(() => getRandomColor(0.2)),
+        borderColor: Array.from(categories).map(() => getRandomColor(0.2)),
+        borderWidth: 1,
       });
     }
+    
+    chart = new Chart(myChartRef, {
+      type: 'pie',
+      data: {
+        labels: Array.from(categories),
+        datasets: datasets,
+      },
+    });
   };
 
   const destroyChart = () => {
