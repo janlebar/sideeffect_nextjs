@@ -17,7 +17,15 @@ function UserInput(args) {
   }, [data]);
 
   const handleClearData = () => {
-    setData([]);
+    try {
+      if (urlInput === medicineName) {
+        setData([]); 
+      }
+    } 
+    catch (error) {
+      setError(true);
+      console.error('ERROR TLE');
+    }
   };
   
   // Function to handle fetching data from an API endpoint and updating the component state
