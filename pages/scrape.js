@@ -3,7 +3,6 @@ import Userinput from '../components/Userinput';
 import MainNavigation from '../components/layout/MainNavigation';
 import RadarChart from '../components/chart';
 import PieChart from '../components/piechart';
-import RadarChartTwo from '../components/radarchart';
 import Card from "../components/ui/Card";
 
 export default function MyComponent() {
@@ -13,19 +12,25 @@ export default function MyComponent() {
     setData(data);
   }
 
+
+  function ifempty(data) {
+    return !data || data.length === 0; // Check if data is undefined or has length 0
+  }
+
+
   return (
     <div>
       <MainNavigation />
-      <Userinput onData={onData} />
+      <Userinput onData={onData}  />
       <Card>
-        {data ? (
-          <RadarChart data={data} />
-        ) : (
+        {ifempty(data) ? (
           <p>No data available for RadarChart</p>
+        ) : (
+          <RadarChart data={data} />
         )}
       </Card>
       <Card>
-        {data ? (
+        {!ifempty(data) ? (
           <PieChart data={data} />
         ) : (
           <p>No data available for RadarChart</p>

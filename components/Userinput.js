@@ -9,24 +9,29 @@ function UserInput(args) {
 
   // When data changes call args.onData with new list of medicines
   useEffect(() => {
-    if (data.length == 0) return;
+    // if (data.length == 0) return; napaka za data set data
 
     console.log("scraped data", data);
 
     args.onData(data);
   }, [data]);
 
-  const handleClearData = () => {
+
+
+
+  const handleClearData = (urlInputMedicine) => {
+    debugger
     try {
-      if (urlInput === medicineName) {
-        setData([]); 
-      }
-    } 
-    catch (error) {
+      setData((data) => data.filter(sideEffects => !sideEffects.find(sideEffect => sideEffect.medicine == urlInputMedicine)));
+      setUrlInputs(urlInputs => urlInputs.filter(urlInput => urlInput != urlInputMedicine));
+    } catch (error) {
       setError(true);
       console.error('ERROR TLE');
+      // Code to handle the exception, if needed
     }
   };
+
+
   
   // Function to handle fetching data from an API endpoint and updating the component state
   const handleScrape = async (urlInput) => {

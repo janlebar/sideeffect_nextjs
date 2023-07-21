@@ -23,6 +23,8 @@ function RadarChart({ data }) {
       destroyChart(); // Kličemo funkcijo destroyChart, ko se komponenta odstrani ali 
       //ko se spremeni prop 'data'
     };
+
+    
   }, [data]);
 
 
