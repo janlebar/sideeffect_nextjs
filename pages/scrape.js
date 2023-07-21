@@ -4,6 +4,7 @@ import MainNavigation from '../components/layout/MainNavigation';
 import RadarChart from '../components/chart';
 import PieChart from '../components/piechart';
 import Card from "../components/ui/Card";
+// import FormAi from "../components/FormAi"
 
 export default function MyComponent() {
   const [data, setData] = useState();
@@ -37,10 +38,9 @@ export default function MyComponent() {
         )}
       </Card>
       {/* <Card>
-        
-      <RadarChartTwo data={data?.medicineName} />
+      <FormAi/>
       </Card> */}
-
     </div>
+
   );
 }
