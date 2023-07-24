@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import { getRandomColor } from './chart-color-scheme';
 
-function PieChart({ data }) {
+
+function PieChart({ data,getRandomColor }) {
   // Create a reference to the canvas element for the chart
   const chartRef = useRef(null);
   let chart = null; // Initialize a variable to hold the Chart.js instance
@@ -17,7 +17,7 @@ function PieChart({ data }) {
 
 
 
-  
+
   const buildChart = () => {
     if (!chartRef.current) return; // If the canvas element is not available, return early
 
@@ -74,6 +74,7 @@ function PieChart({ data }) {
       },
     });
   };
+
 
   const destroyChart = () => {
     if (chart) {

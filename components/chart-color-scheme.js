@@ -1,4 +1,4 @@
-export const getRandomColor = (alpha) => {
+const RandomColorGenerator = (alpha) => {
   const letters = '0123456789ABCDEF';
   let color = 'rgba(';
   for (let i = 0; i < 3; i++) {
@@ -8,6 +8,7 @@ export const getRandomColor = (alpha) => {
   return color;
 };
 
+export default RandomColorGenerator;
   
 
 //   import React, { useState, useEffect} from 'react';

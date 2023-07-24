@@ -4,10 +4,12 @@ import MainNavigation from '../components/layout/MainNavigation';
 import RadarChart from '../components/chart';
 import PieChart from '../components/piechart';
 import Card from "../components/ui/Card";
+import RandomColorGenerator from "../components/chart-color-scheme"
+
 // import FormAi from "../components/FormAi"
 
 export default function MyComponent() {
-  const [data, setData] = useState();
+  const [data, setData,] = useState();
 
   function onData(data) {
     setData(data);
@@ -27,12 +29,12 @@ export default function MyComponent() {
         {ifempty(data) ? (
           <p>No data available for RadarChart</p>
         ) : (
-          <RadarChart data={data} />
+          <RadarChart data={data} getRandomColor={RandomColorGenerator}/>
         )}
       </Card>
       <Card>
         {!ifempty(data) ? (
-          <PieChart data={data} />
+          <PieChart data={data} getRandomColor={RandomColorGenerator}/>
         ) : (
           <p>No data available for RadarChart</p>
         )}

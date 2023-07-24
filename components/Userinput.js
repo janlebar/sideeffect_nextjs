@@ -18,7 +18,7 @@ function UserInput(args) {
 
 
 
-
+  //delete button
   const handleClearData = (urlInputMedicine) => {
     debugger
     try {

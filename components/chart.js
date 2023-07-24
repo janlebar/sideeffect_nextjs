@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import { getRandomColor } from './chart-color-scheme';
 
-function RadarChart({ data }) {
+
+function RadarChart({ data, getRandomColor }) {
   const chartRef = useRef(null); // Sklic na element platna (canvas)
   let chart = null; // Sklic na primer grafikona
 
