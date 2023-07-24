@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
 
-function PieChart({ data,getRandomColor }) {
+function PieChart({ data,color }) {
   // Create a reference to the canvas element for the chart
   const chartRef = useRef(null);
   let chart = null; // Initialize a variable to hold the Chart.js instance
@@ -37,6 +37,7 @@ function PieChart({ data,getRandomColor }) {
 
     const datasets = [];
     // Create datasets for each set of symptoms (presumably for different medicines) in 'data'
+    let i=0 
     for (const symptoms of data) {
       const medicineName = symptoms[0].medicine;
 
@@ -59,10 +60,11 @@ function PieChart({ data,getRandomColor }) {
       datasets.push({
         label: `Niz podatkov ${medicineName}`,
         data: Object.values(occurrences),
-        backgroundColor: Array.from(categories).map(() => getRandomColor(0.2)), // Generate random colors for the pie chart slices
-        borderColor: Array.from(categories).map(() => getRandomColor(0.2)), // Generate random colors for the pie chart borders
+        backgroundColor: Array.from(categories).map(() => color[i]), // Generate random colors for the pie chart slices
+        borderColor: Array.from(categories).map(() => color[i]), // Generate random colors for the pie chart borders
         borderWidth: 1,
       });
+      i++;
     }
 
     // Create a new Chart.js instance with the gathered data

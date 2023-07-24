@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
 
-function RadarChart({ data, getRandomColor }) {
+function RadarChart({ data, color }) {
   const chartRef = useRef(null); // Sklic na element platna (canvas)
   let chart = null; // Sklic na primer grafikona
 
@@ -57,44 +57,38 @@ function RadarChart({ data, getRandomColor }) {
 
 
     //gradis DATASET
-    for (const symptoms of data) { // Iterate over each scraped medicine
-      const medicineName = symptoms[0].medicine;//VZAMEVA PRVI SIMPTOM IN ZA NJEM IME (0=PRVI)
-
-      //OCCURENCES 
-      // We create occurences for each category
-      const occurrences = {}; // Objekt za shranjevanje pojavnosti vsake kategorije
-      for (const symptom of symptoms) { // Iterate over each symptom for medicine
-
-        //POGLEDAVA CE ZE OSTAJAJO KLJUCI TOREJ occurrences V OBJEKTU Z VSEMI SIDEEFFECTA ZA VSE
-        for (const category of categories) {
-          //POGLEDAVA CE ZE OSTAJAJO KLJUCI TOREJ occurrences V OBJEKTU Z VSEMI SIDEEFFECTA
-          if (category in occurrences) continue; // Preskoči, če kategorija že obstaja v objektu occurrences
-          const symptom = symptoms.find((symptom) => symptom.category === category);
   
+    let i = 0;
+
+    for (const symptoms of data) {
+      const medicineName = symptoms[0].medicine;
+    
+      const occurrences = {};
+    
+      for (const symptom of symptoms) {
+        for (const category of categories) {
+          if (category in occurrences) continue;
+          const symptom = symptoms.find((symptom) => symptom.category === category);
+    
           if (symptom) {
             occurrences[category] = symptom.occurrence;
           } else {
             occurrences[category] = 0;
           }
-          //occurrences[category] = symptom ? symptom.occurrence : 0; // Nastavi vrednost pojavnosti, 
-          //če simptom obstaja, sicer nastavi na 0
         }
       }
-
-
-
-      
-      
+    
       console.log(medicineName);
-
+    
       datasets.push({
         label: `Niz podatkov ${medicineName}`,
-        //to spodi samo iz objekta pretvori v arej
         data: Object.values(occurrences),
-        backgroundColor: getRandomColor(0.2), // Dobi naključno barvo za ozadje podatkovnega niza
-        borderColor: getRandomColor(0.2), // Dobi naključno barvo za obrobo podatkovnega niza
+        backgroundColor: color[i % color.length], // Use the color based on the index (i) and the length of the colors array
+        borderColor: color[i % color.length], // Use the same color for the border
         borderWidth: 1,
       });
+    
+      i++;
     }
     
 
