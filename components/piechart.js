@@ -37,7 +37,6 @@ function PieChart({ data,color }) {
 
     const datasets = [];
     // Create datasets for each set of symptoms (presumably for different medicines) in 'data'
-    let i=0 
     for (const symptoms of data) {
       const medicineName = symptoms[0].medicine;
 
@@ -48,7 +47,7 @@ function PieChart({ data,color }) {
           if (category in occurrences) continue;
           const symptom = symptoms.find((symptom) => symptom.category === category);
 
-          if (symptom) {
+          if (symptom) { 
             occurrences[category] = symptom.occurrence;
           } else {
             occurrences[category] = 0;
@@ -60,11 +59,10 @@ function PieChart({ data,color }) {
       datasets.push({
         label: `Niz podatkov ${medicineName}`,
         data: Object.values(occurrences),
-        backgroundColor: Array.from(categories).map(() => color[i]), // Generate random colors for the pie chart slices
-        borderColor: Array.from(categories).map(() => color[i]), // Generate random colors for the pie chart borders
+        backgroundColor: Array.from(categories).map((_, i) => color[i]), // Generate random colors for the pie chart slices
+        borderColor: Array.from(categories).map((_, i) => color[i]), // Generate random colors for the pie chart borders
         borderWidth: 1,
       });
-      i++;
     }
 
     // Create a new Chart.js instance with the gathered data
