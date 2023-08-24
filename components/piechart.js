@@ -59,8 +59,8 @@ function PieChart({ data,color }) {
       datasets.push({
         label: `Niz podatkov ${medicineName}`,
         data: Object.values(occurrences),
-        backgroundColor: Array.from(categories).map((_, i) => color[i]), // Generate random colors for the pie chart slices
-        borderColor: Array.from(categories).map((_, i) => color[i]), // Generate random colors for the pie chart borders
+        backgroundColor: Array.from(categories).map((_, i) => color[i]), 
+        borderColor: Array.from(categories).map((_, i) => color[i]), 
         borderWidth: 1,
       });
     }
