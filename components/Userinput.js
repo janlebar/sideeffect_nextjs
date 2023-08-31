@@ -103,7 +103,7 @@ function UserInput(args) {
 />
       ))}
       {/* Button to add additional input fields */}
-      <button onClick={handleAddInput}>Add Input</button>
+      <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md ml-4" onClick={handleAddInput}>Add Input</button>
       
       {/* Render the RadarChart component */}
       {/* <RadarChart data={data} /> */}
