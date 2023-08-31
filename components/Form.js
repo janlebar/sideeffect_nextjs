@@ -12,10 +12,10 @@ function Form({ urlInput, onSubmit, onChange, onClearData }) {
           onChange={onChange}
         />
       </label>
-      <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md" type="submit">
+      <button className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-md" type="submit">
         Look for side effect
       </button>
-      <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md ml-4" onClick={() => onClearData(urlInput)}>
+      <button className="bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-md ml-4" onClick={() => onClearData(urlInput)}>
         Clear Data
       </button>
     </form>
