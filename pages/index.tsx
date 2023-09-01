@@ -91,25 +91,49 @@ export default function MyMergedComponent() {
         </div>
       {/* Other sections */}
 
+      <div className="card-container">
+  <section>
+    {/* RadarChart and PieChart */}
+    <Userinput onData={onData} />
+    <Card>
+      {ifempty(data) ? (
+        <p>No data available for RadarChart</p>
+      ) : (
+        <RadarChart data={data} color={color} />
+      )}
+    </Card>
+    <Card>
+      {!ifempty(data) ? (
+        <PieChart data={data} color={color} />
+      ) : (
+        <p>No data available for RadarChart</p>
+      )}
+    </Card>
+  </section>
+</div>
 
-      
-      {/* RadarChart and PieChart */}
-      <Userinput onData={onData} />
-      <Card>
-        {ifempty(data) ? (
-          <p>No data available for RadarChart</p>
-        ) : (
-          <RadarChart data={data} color={color} />
-        )}
-      </Card>
-      <Card>
-        {!ifempty(data) ? (
-          <PieChart data={data} color={color} />
-        ) : (
-          <p>No data available for RadarChart</p>
-        )}
-      </Card>
-
+            {/* Other sections */}
+{/* Services Section */}
+<section className="pb-20 bg-gray-300 -mt-24">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-wrap">
+              <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
+                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                  <div className="px-4 py-5 flex-auto">
+                  <div className="p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full" style={{ background: 'linear-gradient(to right, white 50%, #0074e4 50%)', clipPath: 'ellipse(100% 50%)' }}>
+                      <i className="fas fa-award"></i>
+                    </div>
+                    <h6 className="text-xl font-semibold ml-5">Sideeffects</h6>
+                    <p className="mt-2 mb-4 text-gray-600 ml-5">
+                      +
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* Add more service cards */}
+            </div>
+          </div>
+        </section>
 
 
 
@@ -121,11 +145,11 @@ export default function MyMergedComponent() {
               <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
                   <div className="px-4 py-5 flex-auto">
-                    <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
+                  <div className="p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full" style={{ background: 'linear-gradient(to right, white 50%, #0074e4 50%)', clipPath: 'ellipse(100% 50%)' }}>
                       <i className="fas fa-award"></i>
                     </div>
-                    <h6 className="text-xl font-semibold">Sideeffects</h6>
-                    <p className="mt-2 mb-4 text-gray-600">
+                    <h6 className="text-xl font-semibold ml-5">Sideeffects</h6>
+                    <p className="mt-2 mb-4 text-gray-600 ml-5">
                       +
                     </p>
                   </div>
@@ -136,8 +160,15 @@ export default function MyMergedComponent() {
           </div>
         </section>
 
+
+
+
+
+
+
+
 {/* Contact Section */}
-{/* <section className="relative block py-24 lg:pt-0 bg-gray-900">
+<section className="relative block py-24 lg:pt-0 bg-gray-900">
   <div className="container mx-auto px-4">
     <div className="flex flex-wrap justify-center lg:-mt-100 -mt-100">
       <div className="w-full lg:w-6/12 px-4">
@@ -160,9 +191,9 @@ export default function MyMergedComponent() {
                 placeholder="Full Name"
                 style={{ transition: "all .15s ease" }}
               />
-            </div> */}
+            </div>
             {/* Add more form fields */}
-            {/* <div className="text-center mt-6">
+            <div className="text-center mt-6">
               <button
                 className="bg-blue-400 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
@@ -176,7 +207,7 @@ export default function MyMergedComponent() {
       </div>
     </div>
   </div>
-</section> */}
+</section>
 
 
     </>

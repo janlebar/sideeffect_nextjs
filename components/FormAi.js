@@ -1,35 +1,65 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 
-// function FormAi({ handleSubmit, handleInputChange }) {
-//   const [clinicalText, setClinicalText] = useState(""); // Define the clinicalText state variable
+const ClinicalTextClassification = () => {
+  const [clinicalText, setClinicalText] = useState('');
+  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
 
-//   const handleInputChange = (event) => {
-//     setClinicalText(event.target.value);
-//   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-//     // Implement the code to send the clinical text to the backend
-//     // for processing with ClinicalBERT and receive the predictions.
-//   };
+    try {
+      const res = await fetch('/api/your-api-endpoint', {
+        method: 'POST',
+        body: JSON.stringify({ clinicalText }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//         <textarea
-//           rows="5"
-//           cols="50"
-//           value={clinicalText}
-//           onChange={handleInputChange}
-//         />
-//         <button type="submit">Get Prediction</button>
-//       </form>
-//       <div>
-//         <h2>Prediction:</h2>
-//         <p>{prediction}</p>
-//       </div>
-//     </div>
-//   );
-// };
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-// export default FormAi;
+      const data = await res.json();
+      setResponse(data.response);
+    } catch (error) {
+      console.error(error);
+      setResponse('Something went wrong');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Clinical Text Classification</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="clinicalText">Enter Clinical Text:</label>
+          <textarea
+            id="clinicalText"
+            name="clinicalText"
+            value={clinicalText}
+            onChange={(e) => setClinicalText(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Loading...' : 'Classify Text'}
+          </button>
+        </div>
+      </form>
+      {response && (
+        <div>
+          <h2>Classification Result:</h2>
+          <pre>{response}</pre>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ClinicalTextClassification;
