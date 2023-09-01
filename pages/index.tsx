@@ -6,6 +6,7 @@ import Card from "../components/ui/Card";
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import MainNavigation from '../components/layout/MainNavigation';
+import FormAi from '../components/FormAi';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -109,6 +110,9 @@ export default function MyMergedComponent() {
         <p>No data available for RadarChart</p>
       )}
     </Card>
+    <Card>
+    <FormAi/>
+    </Card>
   </section>
 </div>
 
@@ -148,7 +152,6 @@ export default function MyMergedComponent() {
                   <div className="p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full" style={{ background: 'linear-gradient(to right, white 50%, #0074e4 50%)', clipPath: 'ellipse(100% 50%)' }}>
                       <i className="fas fa-award"></i>
                     </div>
-                    <h6 className="text-xl font-semibold ml-5">Sideeffects</h6>
                     <p className="mt-2 mb-4 text-gray-600 ml-5">
                       +
                     </p>
