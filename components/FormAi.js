@@ -24,7 +24,8 @@ const ClinicalTextClassification = () => {
       }
 
       const data = await res.json();
-      setResponse(data.response);
+      setResponse(data.response[0].label);
+      // console.log(data.response);  
     } catch (error) {
       console.error(error);
       setResponse('Something went wrong');
