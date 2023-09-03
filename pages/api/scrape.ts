@@ -30,7 +30,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         results.push({
           CattegoryId: CattegoryId.toString(), // Assign the id as a string
           category: $(h3).text(),
-          occurrence: matches[4], // Update the occurrence to the fourth captured group
+          occurrence: matches[4], // Update the occurrence to the fourth captured grou
+          p
         });
 
         // results.push({
