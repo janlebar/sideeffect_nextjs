@@ -35,10 +35,10 @@ const ClinicalTextClassification = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Clinical Text Classification</h1>
+    <div className="bg-white hover:bg-white-100 text-blue-500 font-bold py-2 px-4 rounded-md ml mt-1 mr-10">
+      <h1 className="text-2xl font-bold mb-4">AI Clinical interpretation</h1>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
+        <div className="bg-white hover:bg-white-100 text-blue-400 font-bold py-2 px-4 rounded-md ml mt-1 mr-10">
           <label htmlFor="clinicalText" className="block font-semibold">
             Enter Clinical Text:
           </label>
@@ -55,9 +55,9 @@ const ClinicalTextClassification = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`bg-blue-500 text-white px-4 py-2 rounded ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`bg-white hover:bg-white-100 text-blue-400 hover:text-blue-500 font-bold py-2 px-4 rounded-md ml-5 mt-1 mr-10 border border-red-300  ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
-            {loading ? 'Loading...' : 'Classify Text'}
+            {loading ? 'Loading...' : 'Analise'}
           </button>
         </div>
       </form>

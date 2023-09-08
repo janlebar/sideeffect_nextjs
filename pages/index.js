@@ -5,7 +5,7 @@ import PieChart from '../components/piechart';
 import Card from "../components/ui/Card";
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
-import MainNavigation from '../components/layout/MainNavigation';
+// import MainNavigation from '../components/layout/MainNavigation';
 import FormAi from '../components/FormAi';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -80,29 +80,32 @@ export default function MyMergedComponent() {
         </div>
       {/* Other sections */}
 
-      <div className="card-container">
-  <section>
-    {/* RadarChart and PieChart */}
-    <Userinput onData={onData} />
-    <Card>
-      {ifempty(data) ? (
-        <p>No data available for RadarChart</p>
-      ) : (
-        <RadarChart data={data} color={color} />
-      )}
-    </Card>
-    <Card>
-      {!ifempty(data) ? (
-        <PieChart data={data} color={color} />
-      ) : (
-        <p>No data available for RadarChart</p>
-      )}
-    </Card>
-    <Card>
-    <FormAi/>
-    </Card>
-  </section>
-</div>
+    <div className="card-container bg-white ">
+      <section>
+        {/* RadarChart and PieChart */}
+        <Userinput onData={onData} />
+        <Card>
+          {ifempty(data) ? (
+            <p className="bg-red-300 text-white font-bold py-2 px-4 rounded-md">
+            Search Medicine to generate chart
+          </p>
+          ) : (
+            <RadarChart data={data} color={color} />
+          )}
+        </Card>
+        <Card>
+          {!ifempty(data) ? (
+            <PieChart data={data} color={color} />
+          ) : (
+            <p className="bg-red-300 text-white font-bold py-2 px-4 rounded-md">
+              No data available for chart</p>
+          )}
+        </Card>
+        <Card>
+        <FormAi/>
+        </Card>
+      </section>
+    </div>
 
             {/* Other sections */}
 {/* Services Section */}
