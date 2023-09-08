@@ -12,34 +12,22 @@ const inter = Inter({ subsets: ['latin'] });
 
 const color = [
   'rgba(255, 255, 0, 0.5)',       // Safety Yellow
-  'rgba(255, 102, 0, 0.5)',       // Blaze Orange
-  'rgba(50, 205, 50, 0.5)',       // Lime Green
   'rgba(255, 0, 0, 0.5)',         // Bright Red
-  'rgba(255, 20, 147, 0.5)',      // Neon Pink
   'rgba(51, 153, 255, 0.5)',      // High-Visibility Blue
   'rgba(204, 255, 102, 0.5)',     // Fluorescent Green
   'rgba(0, 153, 204, 0.5)',       // Electric Blue
-  'rgba(255, 102, 0, 0.5)',       // Traffic Cone Orange
-  'rgba(255, 102, 204, 0.5)',     // Hi-Viz Pink
   'rgba(255, 204, 0, 0.5)',       // Day-Glo Yellow
   'rgba(0, 255, 0, 0.5)',         // Neon Green
-  'rgba(255, 165, 0, 0.5)',       // Bright Orange
   'rgba(204, 0, 0, 0.5)',         // Signal Red
-  'rgba(255, 102, 0, 0.5)',       // Caution Orange
   'rgba(204, 255, 0, 0.5)',       // Fluo Yellow-Green
   'rgba(204, 0, 0, 0.5)',         // Warning Red
   'rgba(153, 51, 255, 0.5)',      // Vibrant Purple
-  'rgba(255, 20, 147, 0.5)',      // Hot Pink
-  'rgba(255, 165, 0, 0.5)',       // Solar Flare (Bright, intense orange)
   'rgba(255, 0, 255, 0.5)',       // Magenta
-  'rgba(255, 153, 51, 0.5)',      // Tangerine
   'rgba(0, 204, 102, 0.5)',       // Emerald Green
   'rgba(153, 0, 204, 0.5)',       // Electric Purple
   'rgba(204, 204, 0, 0.5)',       // Neon Yellow
   'rgba(102, 204, 255, 0.5)',     // Sky Blue
-  'rgba(255, 0, 102, 0.5)',       // Rose Red
   'rgba(0, 102, 204, 0.5)',       // Cornflower Blue
-  'rgba(255, 102, 102, 0.5)',     // Coral Pink
   'rgba(0, 204, 255, 0.5)'        // Aqua Blue
 ];
 
@@ -64,7 +52,7 @@ export default function MyMergedComponent() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MainNavigation />
+      {/* <MainNavigation /> */}
 
       
       {/* Hero Section */}
@@ -86,7 +74,7 @@ export default function MyMergedComponent() {
           </div>
           <div className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden" style={{ height: "70px" }}>
             <svg className="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-              <polygon className="text-gray-300 fill-current" points="2560 0 2560 100 0 100"></polygon>
+              <polygon className="text-white fill-current" points="2560 0 2560 100 0 100"></polygon>
             </svg>
           </div>
         </div>
@@ -118,7 +106,7 @@ export default function MyMergedComponent() {
 
             {/* Other sections */}
 {/* Services Section */}
-<section className="pb-20 bg-gray-300 -mt-24">
+<section className="pb-20 bg-white -mt-24">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap">
               <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
@@ -143,7 +131,7 @@ export default function MyMergedComponent() {
 
             {/* Other sections */}
 {/* Services Section */}
-<section className="pb-20 bg-gray-300 -mt-24">
+<section className="pb-20 bg-white -mt-24">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap">
               <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
