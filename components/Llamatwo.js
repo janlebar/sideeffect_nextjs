@@ -18,7 +18,9 @@ const CurlResponse = () => {
       });
 
       const data = await response.json();
-      setResponseText(JSON.stringify(data, null, 2)); // Convert object to string with indentation
+      // Truncate response text after encountering "done" property
+      const truncatedResponseText = JSON.stringify(data, null, 2).split('"done"')[0] + '"done"';
+      setResponseText(truncatedResponseText); // Set truncated response text
     } catch (error) {
       console.error('Error fetching data:', error);
     }
