@@ -6,7 +6,9 @@ import Card from "../components/ui/Card";
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 // import MainNavigation from '../components/layout/MainNavigation';
-import FormAi from '../components/FormAi';
+// import FormAi from '../components/FormAi';
+import CurlResponse from '../components/Llamatwo';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -102,7 +104,7 @@ export default function MyMergedComponent() {
           )}
         </Card>
         <Card>
-        <FormAi/>
+        <CurlResponse/>
         </Card>
       </section>
     </div>

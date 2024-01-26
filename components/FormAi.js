@@ -10,14 +10,21 @@ const ClinicalTextClassification = () => {
     setLoading(true);
 
     try {
-    //   const res = await fetch('/api/your-api-endpoint', {
-      const res = await fetch('http://localhost:3000/api/apiAi', {
+      const res = await fetch('https://a2c93c98c9d0c56157ac8377-ollama.x-truder.net/api/generate', {
         method: 'POST',
-        body: JSON.stringify({ clinicalText }),
+        body: JSON.stringify({ question: "What side effects could be problematic using aspirin and viagra at the same time?" }),
         headers: {
           'Content-Type': 'application/json',
         },
       });
+
+
+      // curl https://a2c93c98c9d0c56157ac8377-ollama.x-truder.net/api/generate -d '{
+      //   "model": "llama2",
+      //   "prompt": "What sydefects could be problematic using aspirin and viagra a the same time?",     
+      //   "stream": false
+      // }'
+
 
       if (!res.ok) {
         throw new Error('Network response was not ok');
