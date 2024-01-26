@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 const CurlResponse = () => {
   const [responseText, setResponseText] = useState('');
 
@@ -12,7 +11,7 @@ const CurlResponse = () => {
         },
         body: JSON.stringify({
           model: 'llama2',
-          prompt: 'What sydefects could be problematic using aspirin and viagra a the same time?',
+          prompt: 'What side efects could be problematic using ${medicines} at the same time?',
           stream: false
         }),
       });
