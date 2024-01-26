@@ -18,9 +18,15 @@ const CurlResponse = () => {
       });
 
       const data = await response.json();
-      // Truncate response text after encountering "done" property
-      const truncatedResponseText = JSON.stringify(data, null, 2).split('"done"')[0] + '"done"';
-      setResponseText(truncatedResponseText); // Set truncated response text
+      const text = data["response"];
+
+      // Extract text between "response" and "done"
+      //    const responseData = JSON.stringify(data, null, 2);
+      //const startIndex = responseData.indexOf('"response"') + '"response"'.length;
+      //const endIndex = responseData.indexOf('"done"');
+      //const truncatedResponseText = responseData.substring(startIndex, endIndex);
+      
+      setResponseText(text.trim()); // Set trimmed response text
     } catch (error) {
       console.error('Error fetching data:', error);
     }
