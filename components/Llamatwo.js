@@ -1,9 +1,10 @@
 import { useState } from 'react';
-const CurlResponse = () => {
+const CurlResponse = ({urlInputs}) => {
   const [responseText, setResponseText] = useState('');
 
   const fetchData = async () => {
     try {
+      console.log(urlInputs + " " + "TLE");
       const response = await fetch('https://a2c93c98c9d0c56157ac8377-ollama.x-truder.net/api/generate', {
         method: 'POST',
         headers: {
@@ -11,7 +12,7 @@ const CurlResponse = () => {
         },
         body: JSON.stringify({
           model: 'llama2',
-          prompt: 'What side efects could be problematic using ${medicines} at the same time?',
+          prompt: `What sydefects could be problematic using these madicines ${urlInputs} at the same time?`,
           stream: false
         }),
       });

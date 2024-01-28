@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
-const MyComponent = () => {
+
+const MyComponent = ({urlInputs}) => {
   const [response, setResponse] = useState(null);
 
   const fetchData = async () => {
     try {
+      console.log(urlInputs + " " + "TLE");
       const res = await fetch('https://a2c93c98c9d0c56157ac8377-ollama.x-truder.net/api/generate', {
         method: 'POST',
         headers: {
@@ -12,10 +14,12 @@ const MyComponent = () => {
         },
         body: JSON.stringify({
           model: 'llama2',
-          prompt: 'What sydefects could be problematic using aspirin and viagra a the same time?',
+          
+          prompt: `What sydefects could be problematic using these madicines ${urlInputs} at the same time?`,
           stream: false
         })
       });
+
 
       if (!res.ok) {
         throw new Error('Network response was not ok');

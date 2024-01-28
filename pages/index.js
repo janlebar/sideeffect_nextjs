@@ -8,6 +8,7 @@ import { Inter } from 'next/font/google';
 // import MainNavigation from '../components/layout/MainNavigation';
 // import FormAi from '../components/FormAi';
 import CurlResponse from '../components/Llamatwo';
+import urlInputs from '../components/Userinput';
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -104,7 +105,7 @@ export default function MyMergedComponent() {
           )}
         </Card>
         <Card>
-        <CurlResponse/>
+        <CurlResponse urlInputs={urlInputs}/>
         </Card>
       </section>
     </div>

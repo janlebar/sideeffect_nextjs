@@ -7,6 +7,8 @@ function UserInput(args) {
   const [hasError, setError] = useState(false);
   const [urlInputs, setUrlInputs] = useState(['']);
 
+  console.log(urlInputs + " " + "tuki");
+
   // When data changes call args.onData with new list of medicines
   useEffect(() => {
     // if (data.length == 0) return; napaka za data set data
