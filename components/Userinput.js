@@ -5,9 +5,11 @@ import Form from './Form';
 function UserInput(args) { // {onData: fuction, onUrlInputsChanged: func}
   let [data, setData] = useState([]);
   const [hasError, setError] = useState(false);
+  // LAMA PART   // console.log(args.krneki);
   const [urlInputs, setUrlInputs] = useState(['']);
 
-  console.log(args.krneki);
+
+
 
   console.log(urlInputs + " " + "tuki");
 
@@ -20,6 +22,7 @@ function UserInput(args) { // {onData: fuction, onUrlInputsChanged: func}
     args.onData(data);
   }, [data]);
 
+  // LAMA PART
   useEffect(() => {
     args.onUrlInputsChanged(urlInputs);
   }, [urlInputs])

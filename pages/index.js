@@ -37,12 +37,13 @@ const color = [
 
 export default function MyMergedComponent() {
   const [data, setData] = useState();
-  const [followingInput, setUrlInput] = useState();
+  const [followingInput, setUrlInput] = useState(); //LAMA PART
 
   function onData(data) {
     setData(data);
   }
 
+  // LAMA PART CALL BACK FUNCTION
   function onUrlInputsFunc(returnedValue) {
     setUrlInput(returnedValue);
     console.log(returnedValue);
