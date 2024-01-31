@@ -7,8 +7,8 @@ import Head from 'next/head';
 import { Inter } from 'next/font/google';
 // import MainNavigation from '../components/layout/MainNavigation';
 // import FormAi from '../components/FormAi';
-import CurlResponse from '../components/Llamatwo';
-import urlInputs from '../components/Userinput';
+import Lama from '../components/Llamatwo';
+import UrlInput from '../components/Userinput';
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -37,10 +37,17 @@ const color = [
 
 export default function MyMergedComponent() {
   const [data, setData] = useState();
+  const [followingInput, setUrlInput] = useState();
 
   function onData(data) {
     setData(data);
   }
+
+  function onUrlInputsFunc(returnedValue) {
+    setUrlInput(returnedValue);
+    console.log(returnedValue);
+  }
+
 
   function ifempty(data) {
     return !data || data.length === 0;
@@ -86,7 +93,7 @@ export default function MyMergedComponent() {
     <div className="card-container bg-white ">
       <section>
         {/* RadarChart and PieChart */}
-        <Userinput onData={onData} />
+        <Userinput onData={onData} onUrlInputsChanged={onUrlInputsFunc} krneki="test"/>
         <Card>
           {ifempty(data) ? (
             <p className="bg-red-300 text-white font-bold py-2 px-4 rounded-md">
@@ -105,7 +112,7 @@ export default function MyMergedComponent() {
           )}
         </Card>
         <Card>
-        <CurlResponse urlInputs={urlInputs}/>
+        <Lama followingInput={followingInput}/>
         </Card>
       </section>
     </div>

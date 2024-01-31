@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Form from './Form';
 // import RadarChart from './chart';
 
-function UserInput(args) {
+function UserInput(args) { // {onData: fuction, onUrlInputsChanged: func}
   let [data, setData] = useState([]);
   const [hasError, setError] = useState(false);
   const [urlInputs, setUrlInputs] = useState(['']);
+
+  console.log(args.krneki);
 
   console.log(urlInputs + " " + "tuki");
 
@@ -17,6 +19,10 @@ function UserInput(args) {
 
     args.onData(data);
   }, [data]);
+
+  useEffect(() => {
+    args.onUrlInputsChanged(urlInputs);
+  }, [urlInputs])
 
 
 

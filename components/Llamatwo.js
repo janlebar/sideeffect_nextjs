@@ -1,10 +1,10 @@
 import { useState } from 'react';
-const CurlResponse = ({urlInputs}) => {
+const Lamafunction = ({followingInput}) => {
   const [responseText, setResponseText] = useState('');
 
   const fetchData = async () => {
     try {
-      console.log(urlInputs + " " + "TLE");
+      console.log(followingInput + " " + "TLE");
       const response = await fetch('https://a2c93c98c9d0c56157ac8377-ollama.x-truder.net/api/generate', {
         method: 'POST',
         headers: {
@@ -12,7 +12,7 @@ const CurlResponse = ({urlInputs}) => {
         },
         body: JSON.stringify({
           model: 'llama2',
-          prompt: `What sydefects could be problematic using these madicines ${urlInputs} at the same time?`,
+          prompt: `What sydefects could be problematic using these madicines ${followingInput} at the same time?`,
           stream: false
         }),
       });
@@ -42,5 +42,5 @@ const CurlResponse = ({urlInputs}) => {
   );
 };
 
-export default CurlResponse;
+export default Lamafunction;
 
