@@ -4,8 +4,10 @@ const Lamafunction = ({followingInput}) => {
 
   const fetchData = async () => {
     try {
+      const apiKey = process.env.API_KEY; // Accessing the API key from environment variables
+
       console.log(followingInput + " " + "TLE");
-      const response = await fetch('https://a2c93c98c9d0c56157ac8377-ollama.x-truder.net/api/generate', {
+      const response = await fetch(apiKey, { // Use the API key in the fetch URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

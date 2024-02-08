@@ -38,3 +38,6 @@ next-env.d.ts
 #docker ker še ni zbildan
 .dockerignore
 Dockerfile
+
+.env.local
+.env.production
