@@ -9,6 +9,7 @@ import { Inter } from 'next/font/google';
 // import FormAi from '../components/FormAi';
 import Lama from '../components/Llamatwo';
 import UrlInput from '../components/Userinput';
+// import color from '../components/constants/constants';
 
 
 const inter = Inter({ subsets: ['latin'] });
