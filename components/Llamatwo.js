@@ -1,4 +1,6 @@
 import { useState } from 'react';
+
+
 const Lamafunction = ({followingInput}) => {
   const [responseText, setResponseText] = useState('');
 
@@ -7,15 +9,13 @@ const Lamafunction = ({followingInput}) => {
       const apiKey = process.env.API_KEY; // Accessing the API key from environment variables
 
       console.log(followingInput + " " + "TLE");
-      const response = await fetch(apiKey, { // Use the API key in the fetch URL
+      const response = await fetch("/api/lama", { // Use the API key in the fetch URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'llama2',
-          prompt: `What sydefects could be problematic using these madicines ${followingInput} at the same time?`,
-          stream: false
+          followingInput: followingInput,
         }),
       });
 

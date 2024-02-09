@@ -9,8 +9,6 @@ function UserInput(args) { // {onData: fuction, onUrlInputsChanged: func}
   const [urlInputs, setUrlInputs] = useState(['']);
 
 
-
-
   console.log(urlInputs + " " + "tuki");
 
   // When data changes call args.onData with new list of medicines
