@@ -7,6 +7,7 @@ const Lamafunction = ({followingInput}) => {
   const fetchData = async () => {
     try {
       const apiKey = process.env.API_KEY; // Accessing the API key from environment variables
+      // const accessKey = process.env.NEXT_PUBLIC_ACCESS_KEY;
 
       console.log(followingInput + " " + "TLE");
       const response = await fetch("/api/lama", { // Use the API key in the fetch URL
@@ -36,7 +37,7 @@ const Lamafunction = ({followingInput}) => {
 
   return (
     <div>
-      <button className='bg-white hover:bg-white-100 text-blue-400 hover:text-blue-500 font-bold py-2 px-4 rounded-md ml-5 mt-1 mr-10 border border-red-300' onClick={fetchData}>Fetch Data</button>
+      <button className='bg-white hover:bg-white-100 text-blue-400 hover:text-blue-500 font-bold py-2 px-4 rounded-md ml-5 mt-1 mr-10 border border-red-300' onClick={fetchData}>Check medicine combination with AI</button>
       <div>
         <textarea value={responseText} readOnly rows={10} cols={50} />
       </div>

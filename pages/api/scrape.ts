@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const $ = cheerio.load(data); // Parsing the HTML content using cheerio.
 
     // vsi h3 naslovi za #professional-info elementom
-    const allTitles = $('.contentBox #professional-info').nextAll("h3").get();
+    const allTitles = $('#professional-info').nextAll("h3").get();
 
     // lista vseh simptomov
     const results = [];
@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         results.push({
           CattegoryId: CattegoryId.toString(), // Assign the id as a string
           category: $(h3).text(),
-          occurrence: matches[4], // Update the occurrence to the fourth captured grou
+          occurrence: matches[4], // Update the occurrence to the fourth captured group
           
         });
 

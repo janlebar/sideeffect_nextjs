@@ -7,6 +7,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // Retrieve the API key from environment variables
       const apiKey = process.env.API_KEY;
       
+      if (!apiKey) {
+        throw new Error('API key is not defined');
+      }
+      
       // Parse request body as JSON
       const { followingInput } = req.body;
 

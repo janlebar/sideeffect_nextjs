@@ -5,6 +5,7 @@ import Form from './Form';
 function UserInput(args) {
   // State for scraped data
   let [data, setData] = useState([]);
+
   // State for error handling
   const [hasError, setError] = useState(false);
   // State for URL inputs
@@ -12,6 +13,7 @@ function UserInput(args) {
 
   // useEffect to trigger onData function when data changes
   useEffect(() => {
+    console.log(data + "userinput")
     args.onData(data);
   }, [data]);
 

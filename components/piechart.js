@@ -9,6 +9,7 @@ function PieChart({ data,color }) {
 
   // This useEffect hook will run whenever the 'data' prop changes
   useEffect(() => {
+    console.log(data + "piechart")
     buildChart(); // Build the chart when the component mounts or when 'data' prop changes
     return () => {
       destroyChart(); // Destroy the chart when the component unmounts to prevent memory leaks
