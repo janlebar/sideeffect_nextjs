@@ -7,6 +7,7 @@ const Lamafunction = ({followingInput}) => {
   const fetchData = async () => {
     try {
       const apiKey = process.env.API_KEY; // Accessing the API key from environment variables
+      // const accessKey = process.env.NEXT_PUBLIC_ACCESS_KEY;
 
       console.log(followingInput + " " + "TLE");
       const response = await fetch("/api/lama", { // Use the API key in the fetch URL
