@@ -8,7 +8,7 @@ function UserInput(args) {
 
   // State for error handling
   const [hasError, setError] = useState(false);
-  // State for URL inputs
+ // LAMA PART   // console.log(args.krneki);
   const [urlInputs, setUrlInputs] = useState(['']);
 
   // useEffect to trigger onData function when data changes
@@ -17,7 +17,7 @@ function UserInput(args) {
     args.onData(data);
   }, [data]);
 
-  // useEffect to trigger onUrlInputsChanged function when urlInputs change
+ // LAMA PART 
   useEffect(() => {
     args.onUrlInputsChanged(urlInputs);
   }, [urlInputs]);
