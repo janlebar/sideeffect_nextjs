@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       // Retrieve the API key from environment variables
       const apiKey = process.env.API_KEY;
-      
+
       if (!apiKey) {
         throw new Error('API key is not defined');
       }
