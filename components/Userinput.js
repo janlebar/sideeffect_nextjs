@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Form from './Form';
+import CustomPrompt from './Error.js';
 // import RadarChart from './chart';
 
 function UserInput(args) {
@@ -33,27 +34,30 @@ function UserInput(args) {
     }
   };
 
-  // Function to handle fetching data from an API endpoint
-  const handleScrape = async (urlInput) => {
-    try {
-      const response = await fetch(`/api/scrape?url=https://www.drugs.com/sfx/${urlInput}-side-effects.html`);
-      if (!response.ok) {
-        setError(true);
-        return;
-      }
-
-      const scrapedData = await response.json();
-      for (const data of scrapedData) {
-        data.medicine = urlInput.toString();
-      }
-      
-      setData((oldData) => [...oldData, scrapedData]);
-      setError(false);
-    } catch (error) {
-      setError(true);
-      console.error(error);
+// Function to handle fetching data from an API endpoint
+const handleScrape = async (urlInput) => {
+  try {
+    const response = await fetch(`/api/scrape?url=https://www.drugs.com/sfx/${urlInput}-side-effects.html`);
+    
+    // If response status is not OK (404 or 500), throw an error
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
     }
-  };
+
+    const scrapedData = await response.json();
+    for (const data of scrapedData) {
+      data.medicine = urlInput.toString();
+    }
+    
+    setData((oldData) => [...oldData, scrapedData]);
+    setError(false);
+  } catch (error) {
+    // Show a prompt to the user when there's an error
+    window.alert('Information on medicine you are looking for is not available at the moment.');
+    setError(true);
+    console.error(error);
+  } 
+};
 
   // Function to handle form submission
   const handleSubmit = (event, index) => {
