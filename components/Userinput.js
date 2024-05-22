@@ -56,6 +56,8 @@ const handleScrape = async (urlInput) => {
     window.alert('Information on medicine you are looking for is not available at the moment.');
     setError(true);
     console.error(error);
+    // Refresh the page after user presses OK
+    window.location.reload();
   } 
 };
 
