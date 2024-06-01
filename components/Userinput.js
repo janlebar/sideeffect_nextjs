@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Form from './Form';
 import CustomPrompt from './Error.js';
+import { signal } from "@preact/signals-core";
 // import RadarChart from './chart';
+
+
+// const onChangeSignal = signal('0');
+
+// // Read value from signal, logs: 0 or null in this case
+
+
+
+
+const onChangeSignal = signal('');
+  
+
 
 function UserInput(args) {
   // State for scraped data
@@ -9,14 +22,23 @@ function UserInput(args) {
 
   // State for error handling
   const [hasError, setError] = useState(false);
+
+  //ADDING NEW INPUT FORM
   // State for URL inputs
   const [urlInputs, setUrlInputs] = useState(['']);
+
+  console.log(onChangeSignal.value + "signal");
+
+  // useEffect(() => {
+  //   console.log(onChangeSignal.value + " signal");
+  // }, [onChangeSignal.value]);
+
 
   // useEffect to trigger onData function when data changes
   useEffect(() => {
     console.log(data + "userinput")
     args.onData(data);
-  }, [data]);
+  }, [data]); 
 
   // useEffect to trigger onUrlInputsChanged function when urlInputs change
   useEffect(() => {
@@ -33,6 +55,8 @@ function UserInput(args) {
       console.error('ERROR TLE');
     }
   };
+
+
 
 // Function to handle fetching data from an API endpoint
 const handleScrape = async (urlInput) => {
@@ -61,6 +85,10 @@ const handleScrape = async (urlInput) => {
   } 
 };
 
+
+
+
+
   // Function to handle form submission
   const handleSubmit = (event, index) => {
     event.preventDefault();
@@ -72,8 +100,12 @@ const handleScrape = async (urlInput) => {
     const newUrlInputs = [...urlInputs];
     newUrlInputs[index] = event.target.value;
     setUrlInputs(newUrlInputs);
+    onChangeSignal.value = event.target.value;
   };
 
+
+
+  //FORM ADD MEDICINE
   // Function to add additional input fields for URLs
   const handleAddInput = () => {
     setUrlInputs((prevInputs) => [...prevInputs, '']);

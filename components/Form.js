@@ -1,7 +1,10 @@
 import React from 'react';
 
 function Form({ urlInput, onSubmit, onChange, onClearData }) {
-  
+
+
+
+
   return (
     <form className="bg-white p-6 shadow-md rounded-md ml-10" onSubmit={onSubmit}>
       <label className="bg-white hover:bg-white-100 text-blue-400 font-bold py-2 px-4 rounded-md ml mt-1 mr-10">
