@@ -16,9 +16,11 @@ function Form({ urlInput, onSubmit, onChange, onClearData }) {
           onChange={onChange}
         />
       </label>
-      <button className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-md" type="submit">
+      <button className="bg-white hover:bg-white-100 text-blue-400 hover:text-blue-500 font-bold py-2 px-4 rounded-md ml mt-1 mr-10 border border-red-300" onClick={''}>Add Medicine</button>
+  
+      {/* <button className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-md" type="submit">
         Look for side effect
-      </button>
+      </button> */}
       <button className="bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-md ml-4" onClick={() => onClearData(urlInput)}>
         Clear Data
       </button>

@@ -130,7 +130,7 @@ const handleScrape = async (urlInput) => {
         />
       ))}
       {/* Button to add additional input fields */}
-      <button className="bg-white hover:bg-white-100 text-blue-400 hover:text-blue-500 font-bold py-2 px-4 rounded-md ml-14 mt-1 mr-10 border border-red-300" onClick={handleAddInput}>Add Medicine</button>
+      {/* <button className="bg-white hover:bg-white-100 text-blue-400 hover:text-blue-500 font-bold py-2 px-4 rounded-md ml-14 mt-1 mr-10 border border-red-300" onClick={handleAddInput}>Add Medicine</button> */}
     </div>
   );
 }
