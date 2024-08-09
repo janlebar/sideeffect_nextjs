@@ -35,7 +35,7 @@ import { useState } from 'react';
 
 function Userinput() {
   const [data, setData] = useState([]);
-  const [urlInputs, setUrlInputs] = useState(['']);
+  const [allurlInputs, setUrlInputs] = useState(['']);
 
   const handleScrape = async (urlInput) => {
     const response = await fetch(`/api/scrape?url=https://www.drugs.com/sfx/${urlInput}-side-effects.html`);
@@ -45,11 +45,11 @@ function Userinput() {
 
   const handleSubmit = (event, index) => {
     event.preventDefault();
-    handleScrape(urlInputs[index]);
+    handleScrape(allurlInputs[index]);
   };
 
   const handleChange = (event, index) => {
-    const newUrlInputs = [...urlInputs];
+    const newUrlInputs = [...allurlInputs];
     newUrlInputs[index] = event.target.value;
     setUrlInputs(newUrlInputs);
   };
@@ -60,7 +60,7 @@ function Userinput() {
 
   return (
     <div>
-      {urlInputs.map((urlInput, index) => (
+      {allurlInputs.map((urlInput, index) => (
         <form key={index} onSubmit={(event) => handleSubmit(event, index)}>
           <label>
             Enter drug name:
