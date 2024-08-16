@@ -67,7 +67,7 @@ function RadarChart({ data, color }) {
       }
 
       datasets.push({
-        label: `Niz podatkov ${medicine}`,
+        label: `All sidefects for ${medicine}`,
         data: occurrences,
         backgroundColor: color[i % color.length], // Use the color based on the index (i) and the length of the colors array
         borderColor: color[i % color.length], // Use the same color for the border

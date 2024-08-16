@@ -96,7 +96,7 @@ export default function MyMergedComponent() {
               <RadarChart data={data} color={colors} />
             )}
           </Card> 
-          {/* <Card>
+          <Card>
             {!ifEmpty(data) ? (
               <PieChart data={data} color={colors} />
             ) : (
@@ -104,7 +104,7 @@ export default function MyMergedComponent() {
                 No data available for chart
               </p>
             )}
-          </Card> */}
+          </Card>
           <Card>
             <Lama followingInput={followingInput} />
           </Card>
