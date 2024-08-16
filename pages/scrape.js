@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Userinput from '../components/Userinput';
+import Listofmedicines from '../components/Listofmedicines';
 import MainNavigation from '../components/layout/MainNavigation';
 import RadarChart from '../components/chart';
 import PieChart from '../components/piechart';
@@ -42,7 +42,7 @@ export default function MyComponent() {
   return (
     <div>
       <MainNavigation />
-      <Userinput onData={onData}  />
+      <Listofmedicines onData={onData}  />
       <Card>
         {ifempty(data) ? (
           <p>No data available for RadarChart</p>

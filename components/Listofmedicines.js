@@ -102,7 +102,7 @@
 // };
 
 
-// Import necessary modules
+// // Import necessary modules
 // import { useState } from 'react';
 
 // const AddMedicine = ({ onAddMedicine }) => {
@@ -142,7 +142,7 @@
 //   );
 // };
 
-// const Listofmedicines = () => {
+// export const Listofmedicines = () => {
 //   const [medicines, setMedicines] = useState([]);
 //   const [scrapedData, setScrapedData] = useState([]);
 
@@ -200,21 +200,28 @@
 //         </ul>
 //       </div>
 //       <button onClick={handleScrapeClick}>Scrape</button> {/* Scrape button */}
+      
 //       {scrapedData.length > 0 && (
 //         <div>
 //           <h3>Scraped Data</h3>
 //           {/* Display scraped data */}
-//           <pre>{JSON.stringify(scrapedData, null, 2)}</pre> 
+//           <pre>{JSON.stringify(scrapedData, null, 2)}</pre>
 //         </div>
+//       )}
+
+//       {scrapedData.map((data, index) => {
+//         console.log("HERE", data);
+//         return <div key={index}>
+//           <h2>{data.title}</h2>
+//           <p>{data.description}</p>
+
+//         </div>}
 //       )}
 //     </div>
 //   );
 // };
 
-
-// // Export the App component as the default export
-// export default Listofmedicines;
-
+// Import necessary modules
 import { useState } from 'react';
 
 const AddMedicine = ({ onAddMedicine }) => {
@@ -226,10 +233,6 @@ const AddMedicine = ({ onAddMedicine }) => {
 
   const handleAddMedicine = (event) => {
     event.preventDefault();
-    if (inputValue.trim() === '') {
-      alert('Medicine name cannot be empty');
-      return;
-    }
     onAddMedicine(inputValue);
     setInputValue(''); // Clear the input field after adding the medicine
   };
@@ -258,7 +261,7 @@ const RemoveMedicine = ({ medicine, onRemoveMedicine }) => {
   );
 };
 
-const Listofmedicines = () => {
+export const Listofmedicines = ({ onData }) => {
   const [medicines, setMedicines] = useState([]);
   const [scrapedData, setScrapedData] = useState([]);
 
@@ -283,17 +286,12 @@ const Listofmedicines = () => {
       });
 
       const scrapedData = await response.json();
-      
-      // Ensure the response is an array before updating state
-      if (Array.isArray(scrapedData)) {
-        setScrapedData((prevData) => [...prevData, ...scrapedData]);
-      } else {
-        console.error('Unexpected response format:', scrapedData);
-        alert('An error occurred while scraping the data.');
-      }
+      setScrapedData((prevData) => [...prevData, ...scrapedData]); // Add all scraped data to the state
+
+      // Pass the scraped data to the parent component (MyMergedComponent)
+      onData(scrapedData);
     } catch (error) {
       console.error('Failed to scrape the list of URLs:', error);
-      alert('An error occurred while scraping the data.');
     }
   };
 
@@ -302,7 +300,6 @@ const Listofmedicines = () => {
       handleScrape(medicines); // Call handleScrape with the list of medicines
     } else {
       console.log('No medicines to scrape');
-      alert('No medicines to scrape.');
     }
   };
 
@@ -324,14 +321,14 @@ const Listofmedicines = () => {
         </ul>
       </div>
       <button onClick={handleScrapeClick}>Scrape</button> {/* Scrape button */}
+      
       {scrapedData.length > 0 && (
         <div>
           <h3>Scraped Data</h3>
-          <pre>{JSON.stringify(scrapedData, null, 2)}</pre> {/* Display scraped data */}
+          {/* Display scraped data */}
+          <pre>{JSON.stringify(scrapedData, null, 2)}</pre>
         </div>
       )}
     </div>
   );
 };
-
-export default Listofmedicines;

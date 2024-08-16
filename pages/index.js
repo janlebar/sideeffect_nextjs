@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Userinput from '../components/Userinput';
+import { Listofmedicines } from '../components/Listofmedicines';
 import RadarChart from '../components/chart';
 import PieChart from '../components/piechart';
 import Card from "../components/ui/Card";
@@ -33,17 +33,18 @@ const colors = [
 ];
 
 export default function MyMergedComponent() {
-  const [data, setData] = useState();
+  const [data, setData] = useState();  // State to hold the chart data
   const [followingInput, setUrlInput] = useState();
 
   function onData(data) {
-    setData(data);
+    setData(data);  // Update the chart data state
   }
 
   function onUrlInputsFunc(returnedValue) {
     setUrlInput(returnedValue);
     console.log(returnedValue);
   }
+
 
   function ifEmpty(data) {
     return !data || data.length === 0;
@@ -85,7 +86,7 @@ export default function MyMergedComponent() {
       {/* Main Content Section */}
       <div className="card-container bg-white">
         <section>
-          <Userinput onData={onData} onUrlInputsChanged={onUrlInputsFunc} />
+          <Listofmedicines onData={onData} onUrlInputsChanged={onUrlInputsFunc} />
           <Card>
             {ifEmpty(data) ? (
               <p className="bg-red-300 text-white font-bold py-2 px-4 rounded-md">
@@ -94,8 +95,8 @@ export default function MyMergedComponent() {
             ) : (
               <RadarChart data={data} color={colors} />
             )}
-          </Card>
-          <Card>
+          </Card> 
+          {/* <Card>
             {!ifEmpty(data) ? (
               <PieChart data={data} color={colors} />
             ) : (
@@ -103,7 +104,7 @@ export default function MyMergedComponent() {
                 No data available for chart
               </p>
             )}
-          </Card>
+          </Card> */}
           <Card>
             <Lama followingInput={followingInput} />
           </Card>

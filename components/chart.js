@@ -42,64 +42,46 @@ function RadarChart({ data, color }) {
     if (chart) {
       destroyChart(); 
     }
-    
-    //HERE FIRST DATA COMES IN
-    // Create a set of categories
-    const categories = new Set(); // Množica unikatnih kategorij v podatkih
-    for (const symptoms of data) {
-      for (const symptom of symptoms) {
-        categories.add(symptom.category);
-      }
-    }
-    // NAJPREJ PRAZEN AREJ KI GA NAFILAS
-    const datasets = [];
 
+    console.log(data);
 
+    // {"kategorija1": [simptom1, simptom2], "kategoriaj2": [simptom1, simptom2]}
+    const symptomsByMedicine = Object.groupBy(data, ({ url }) => url);
+    const categories = new Set(data.map(({ category }) => category));
 
     //gradis DATASET
   
     let i = 0;
+    const datasets = [];
+    for (const [medicine, symptoms] of Object.entries(symptomsByMedicine)) {
+      const occurrences = [];
 
-    for (const symptoms of data) {
-      const medicineName = symptoms[0].medicine;
-    
-      const occurrences = {};
-    
-      for (const symptom of symptoms) {
-        for (const category of categories) {
-          if (category in occurrences) continue;
-          const symptom = symptoms.find((symptom) => symptom.category === category);
-    
-          if (symptom) {
-            occurrences[category] = symptom.occurrence;
-          } else {
-            occurrences[category] = 0;
-          }
+      for (const category of categories) {
+        const symptomForCategory = symptoms.find((symptom) => symptom.category === category);
+
+        if (symptomForCategory) {
+          occurrences.push(symptomForCategory.occurrence);
+        } else {
+          occurrences.push(0);
         }
       }
-    
-      console.log(medicineName);
-    
+
       datasets.push({
-        label: `Niz podatkov ${medicineName}`,
-        data: Object.values(occurrences),
+        label: `Niz podatkov ${medicine}`,
+        data: occurrences,
         backgroundColor: color[i % color.length], // Use the color based on the index (i) and the length of the colors array
         borderColor: color[i % color.length], // Use the same color for the border
         borderWidth: 1,
       });
-    
+  
       i++;
     }
-    
-
-
-
 
 
     chart = new Chart(myChartRef, {
       type: 'radar',
       data: {
-        labels: Array.from(categories), // Pretvori množico kategorij v polje za oznake na grafikonu
+        labels: [...categories], // Pretvori množico kategorij v polje za oznake na grafikonu
         datasets: datasets, // Dodeli sestavljene podatkovne nize grafikonu
       },
       options: {
